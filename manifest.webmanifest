@@ -1,0 +1,15 @@
+{
+  "name": "Devotion Notebook",
+  "short_name": "Devotions",
+  "description": "A cozy notebook for daily devotions",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#DDF0F0",
+  "theme_color": "#CDECD5",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

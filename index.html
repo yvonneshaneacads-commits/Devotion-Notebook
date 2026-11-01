@@ -1,0 +1,1132 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Devotion Notebook</title>
+<meta name="theme-color" content="#CDECD5">
+<meta name="description" content="A cozy notebook for daily devotions">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Devotions">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nunito:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  /* Layout: a soft pastel garden page. Crayon-brown outlines, a lace edge at the top, rounded wobbly cards,
+     bottom tab bar on phones and a left rail on wide screens. Clovers mark finished days. */
+  --bg:#DDF0F0;
+  --bg-all:radial-gradient(circle,rgba(255,255,255,.5) 2px,transparent 2.6px) 0 0/22px 22px,linear-gradient(180deg,#D6EBF6 0%,#DCF1F1 45%,#CDEBD2 100%);
+  --paper:#FFFEFA; --paper-2:#F3FAF6;
+  --ink:#4B3B3D; --ink-2:#6C5C5B; --outline:#6B5655; --rule:#CFE3EC;
+  --blue:#2A80BC; --blue-soft:#C4E5F6; --pink:#E0668A; --pink-soft:#FADCE5;
+  --green:#2F7D4F; --green-soft:#CDECD5; --on-accent:#FFFFFF; --hl:#F9E48F; --danger:#B83F34;
+  --scrim:rgba(46,34,36,.5);
+  --serif:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --hand:'Gaegu','Chalkboard SE','Comic Sans MS',cursive;
+  --wob:18px 24px 16px 26px / 24px 16px 26px 18px;
+  --wob-s:11px 15px 10px 16px / 15px 10px 16px 11px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#112427;
+  --bg-all:radial-gradient(circle,rgba(255,255,255,.04) 2px,transparent 2.6px) 0 0/22px 22px,linear-gradient(180deg,#0E1B26 0%,#112427 50%,#12281F 100%);
+  --paper:#172A30; --paper-2:#1D343A;
+  --ink:#F2E9E0; --ink-2:#B9ACA3; --outline:#C9B8AC; --rule:#2C4852;
+  --blue:#8CCBF0; --blue-soft:#24495E; --pink:#F59AB4; --pink-soft:#4B2C38;
+  --green:#85D6A0; --green-soft:#264B39; --on-accent:#0D2417; --hl:#5E5522; --danger:#F29C8E;
+  --scrim:rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#112427;
+  --bg-all:radial-gradient(circle,rgba(255,255,255,.04) 2px,transparent 2.6px) 0 0/22px 22px,linear-gradient(180deg,#0E1B26 0%,#112427 50%,#12281F 100%);
+  --paper:#172A30; --paper-2:#1D343A;
+  --ink:#F2E9E0; --ink-2:#B9ACA3; --outline:#C9B8AC; --rule:#2C4852;
+  --blue:#8CCBF0; --blue-soft:#24495E; --pink:#F59AB4; --pink-soft:#4B2C38;
+  --green:#85D6A0; --green-soft:#264B39; --on-accent:#0D2417; --hl:#5E5522; --danger:#F29C8E;
+  --scrim:rgba(0,0,0,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg-all);background-color:var(--bg);background-attachment:fixed;color:var(--ink);font:16px/1.55 var(--serif);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:34px 120px;min-height:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:var(--blue)}
+.muted{color:var(--ink-2)}
+.lab{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* lace edge */
+.lace{position:absolute;top:env(safe-area-inset-top,0px);left:0;right:0;height:14px;pointer-events:none;
+  background:radial-gradient(circle at 12px 5px,var(--blue-soft) 2.2px,transparent 2.8px) 0 0/24px 100% repeat-x,var(--paper);
+  -webkit-mask:radial-gradient(circle at 12px 0,#000 11px,transparent 11.6px) 0 0/24px 100% repeat-x;
+  mask:radial-gradient(circle at 12px 0,#000 11px,transparent 11.6px) 0 0/24px 100% repeat-x}
+
+.app{max-width:1020px;margin:0 auto;display:grid;gap:16px;position:relative}
+.top{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;position:relative;padding-block:6px}
+.brand{display:flex;align-items:center;gap:8px;font:700 34px/1.1 var(--hand);color:var(--blue);
+  -webkit-text-stroke:7px var(--paper);paint-order:stroke fill;letter-spacing:.01em}
+.brand svg{width:34px;height:34px;color:var(--green);-webkit-text-stroke:0;flex:none}
+.sync{font-size:13px;font-weight:700;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;background:var(--paper);border:1.5px solid var(--outline);border-radius:999px;padding:3px 12px}
+.sync::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--ink-2)}
+.sync[data-s="saved"]::before{background:var(--green)}
+.sync[data-s="error"]::before{background:var(--danger)}
+.sync[data-s="local"]::before{background:transparent;border:2px solid var(--ink-2)}
+.star{position:absolute;width:22px;height:22px;pointer-events:none;stroke-linejoin:round;stroke-width:2;fill:currentColor;stroke:currentColor}
+.star.a{color:var(--pink);right:6%;top:-6px;transform:rotate(12deg)}
+.star.b{color:var(--blue);right:14%;top:30px;width:14px;height:14px}
+.star.c{color:#E9B84A;right:2%;top:26px;width:16px;height:16px;transform:rotate(-14deg)}
+
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:2px;background:var(--paper);border-top:2px solid var(--outline);
+  padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.nav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:54px;background:none;border:0;border-radius:var(--wob-s);
+  color:var(--ink-2);font:700 12px var(--serif);cursor:pointer}
+.nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav button[aria-current="page"]{color:var(--ink)}
+.nav button[aria-current="page"] span{background:linear-gradient(transparent 55%,var(--hl) 55%)}
+.nav button:hover{background:var(--paper-2)}
+
+.sheet{background:var(--paper);border:2px solid var(--outline);border-radius:var(--wob);padding:20px 18px 24px;min-width:0;display:grid;gap:26px;align-content:start}
+.sheet>section,.sheet>div{min-width:0}
+h2{font:700 32px/1.15 var(--hand);color:var(--blue);text-wrap:balance}
+h3{font:700 24px/1.2 var(--hand);color:var(--ink)}
+h4{font-size:15px;font-weight:800}
+.sec{display:grid;gap:12px}
+.sec>header{display:grid;gap:2px}
+
+.btn{min-height:46px;padding:0 18px;border-radius:var(--wob-s);border:2px solid var(--outline);background:var(--paper);color:var(--ink);font:800 15px var(--serif);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;text-align:center}
+.btn:hover{background:var(--paper-2)}
+.btn.primary{background:var(--green);color:var(--on-accent);border-color:var(--outline)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.quiet{border-color:var(--rule)}
+.btn.danger{color:var(--danger)}
+.btn.sm{min-height:38px;padding:0 12px;font-size:14px}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+
+input[type=text],input[type=number],input[type=date],select,textarea{width:100%;min-height:46px;padding:8px 12px;border:2px solid var(--rule);border-radius:var(--wob-s);background:var(--paper-2);color:var(--ink)}
+input::placeholder,textarea::placeholder{color:var(--ink-2);opacity:.75}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 30%,transparent)}
+textarea{font:17px/32px var(--serif);padding:0 12px 1px;min-height:98px;resize:vertical;background-color:var(--paper-2);
+  background-image:repeating-linear-gradient(transparent 0 31px,var(--rule) 31px 32px);background-attachment:local}
+.fld{display:grid;gap:5px;min-width:0}
+.row2{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.row2{grid-template-columns:110px 1fr}.row2.eq{grid-template-columns:1fr 1fr}}
+
+/* checkboxes */
+.chk{position:relative;display:flex;align-items:center;gap:12px;min-height:50px;padding:5px 0;cursor:pointer;border-bottom:1.5px dashed var(--rule)}
+.chk input{position:absolute;opacity:0;width:26px;height:26px;left:0;margin:0}
+.box{width:28px;height:28px;border:2px solid var(--outline);border-radius:9px 11px 8px 12px/11px 8px 12px 9px;flex:none;display:grid;place-items:center;background:var(--paper-2)}
+.box::after{content:"";width:7px;height:13px;border:solid var(--on-accent);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
+.chk input:checked+.box{background:var(--green)}
+.chk input:checked+.box::after{opacity:1}
+.chk input:focus-visible+.box{outline:3px solid var(--blue);outline-offset:2px}
+.chk .lbl{min-width:0}
+.chk input:checked~.lbl{background:linear-gradient(transparent 58%,var(--hl) 58%)}
+.chk.inline{border:0;min-height:44px}
+
+/* week strip */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.wd{display:grid;gap:0;justify-items:center;padding:6px 0;min-height:60px;border:2px solid var(--rule);border-radius:var(--wob-s);background:var(--paper-2);cursor:pointer;position:relative}
+.wd small{font-size:11px;font-weight:800;color:var(--ink-2)}
+.wd b{font:700 22px/1.1 var(--hand)}
+.wd.today b{color:var(--pink)}
+.wd.sel{border-color:var(--outline);background:var(--hl)}
+.wd.done::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--green);position:absolute;bottom:4px}
+.datebar{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.datebar .fld{flex:1 1 170px}
+
+.note{display:grid;gap:6px;padding:14px 16px;border:2px dashed var(--pink);border-radius:var(--wob-s);background:var(--pink-soft)}
+.note.g{border-color:var(--green);background:var(--green-soft)}
+.note.b{border-color:var(--blue);background:var(--blue-soft)}
+.refprev{min-height:24px;font-size:14px;display:grid;gap:4px}
+.refprev a{font-weight:800}
+
+/* contents (index) */
+.index{position:relative;padding-left:58px}
+.index::before{content:"";position:absolute;left:46px;top:0;bottom:0;width:2px;background:var(--pink);opacity:.55}
+.ix{position:relative;border-bottom:1.5px dashed var(--rule);padding-block:6px}
+.pg{position:absolute;left:-58px;width:38px;top:8px;text-align:right;font:700 26px/1.1 var(--hand);color:var(--pink)}
+.ix-main{display:grid;gap:0;width:100%;text-align:left;background:none;border:0;padding:6px 4px;cursor:pointer;min-height:48px;border-radius:var(--wob-s)}
+.ix-main:hover{background:var(--paper-2)}
+.ix-line{display:flex;align-items:baseline;gap:8px;min-width:0}
+.ttl{font:700 20px/1.25 var(--hand);color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.leader{flex:1;min-width:12px;border-bottom:2px dotted var(--rule);transform:translateY(-4px)}
+.ix time{font-size:13px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+.ix-ref{font-size:14px;color:var(--ink-2)}
+.ix-detail{display:grid;gap:10px;padding:8px 4px 12px}
+.dline h4{color:var(--blue);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.dline p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:32px;background-image:repeating-linear-gradient(transparent 0 31px,var(--rule) 31px 32px)}
+.seg{display:inline-flex;border:2px solid var(--rule);border-radius:var(--wob-s);padding:3px;gap:3px}
+.seg button{min-height:38px;padding:0 14px;border:0;border-radius:8px;background:none;font:800 14px var(--serif);color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.bar{height:12px;border-radius:999px;background:var(--rule);overflow:hidden;border:1.5px solid var(--outline)}
+.bar>i{display:block;height:100%;width:var(--w,0%);background:var(--green)}
+.empty{display:grid;gap:8px;justify-items:start;padding:8px 0}
+
+/* tracker */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:620px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{display:grid;gap:0;padding:10px 14px;border:2px solid var(--rule);border-radius:var(--wob-s);background:var(--paper-2)}
+.stat b{font:700 38px/1.1 var(--hand);color:var(--blue);font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;font-weight:700;color:var(--ink-2)}
+.patch{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.pd{aspect-ratio:1;min-height:44px;display:grid;place-items:center;border:2px solid var(--rule);border-radius:var(--wob-s);background:var(--paper-2);position:relative;cursor:pointer;padding:0}
+.pd svg{width:60%;height:60%;color:var(--green)}
+.pd small{position:absolute;top:2px;left:5px;font-size:11px;font-weight:800;color:var(--ink-2)}
+.pd.done{background:var(--green-soft);border-color:var(--green)}
+.pd.miss svg{color:var(--ink-2);opacity:.28}
+.pd.fut svg{opacity:0}
+.pd.today{border-color:var(--pink);box-shadow:0 0 0 2px var(--pink)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal .h{text-align:center;font-size:12px;font-weight:800;color:var(--ink-2)}
+.cd{aspect-ratio:1;min-height:40px;display:grid;place-items:center;border:2px solid transparent;border-radius:var(--wob-s);background:var(--paper-2);cursor:pointer;position:relative;padding:0;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.cd.l1{background:color-mix(in srgb,var(--green) 14%,var(--paper))}
+.cd.l2{background:color-mix(in srgb,var(--green) 30%,var(--paper))}
+.cd.l3{background:color-mix(in srgb,var(--green) 48%,var(--paper))}
+.cd.full{background:var(--green-soft)}
+.cd.full svg{width:70%;height:70%;color:var(--green);position:absolute;opacity:.9}
+.cd.full span{position:absolute;top:1px;left:4px;font-size:11px}
+.cd.today{border-color:var(--pink)}
+.cd .dot{position:absolute;bottom:3px;width:5px;height:5px;border-radius:50%;background:var(--pink)}
+.calhead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hb{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:4px 10px;align-items:center}
+.hb .bar{grid-column:1/-1;height:10px}
+.hb b{font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* bible */
+.bks{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:8px}
+.bk{display:grid;gap:0;text-align:left;padding:8px 12px;min-height:52px;border:2px solid var(--rule);border-radius:var(--wob-s);cursor:pointer;
+  background:linear-gradient(90deg,var(--hl) var(--p,0%),var(--paper-2) var(--p,0%))}
+.bk b{font-size:15px}
+.bk small{font-size:12px;font-weight:700;color:var(--ink-2)}
+.chs{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:6px}
+.chb{min-height:46px;border:2px solid var(--rule);border-radius:var(--wob-s);background:var(--paper-2);font:800 15px var(--serif);cursor:pointer;font-variant-numeric:tabular-nums}
+.chb.on{background:var(--green-soft);border-color:var(--green)}
+.chb.sel{outline:3px solid var(--pink);outline-offset:1px}
+.radios{display:grid;gap:4px}
+.radios label{display:flex;gap:10px;align-items:center;min-height:44px;cursor:pointer}
+.radios input{width:22px;height:22px;accent-color:var(--green);flex:none}
+
+/* plan */
+.steps{counter-reset:s;display:grid;gap:10px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.steps li::before{content:counter(s);font:700 26px/1 var(--hand);color:var(--pink);text-align:center;border:2px solid var(--pink);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;padding-top:2px}
+.stage{display:grid;grid-template-columns:70px 1fr;gap:4px 12px;align-items:start;padding:10px 0;border-bottom:1.5px dashed var(--rule)}
+.stage b.min{font:700 28px/1.1 var(--hand);color:var(--blue);font-variant-numeric:tabular-nums}
+.stage b.min small{font:700 13px var(--serif);color:var(--ink-2)}
+.timer{display:grid;gap:10px;padding:16px;border:2px solid var(--outline);border-radius:var(--wob-s);background:var(--paper-2)}
+.timer .big{font:700 54px/1 var(--hand);color:var(--ink);font-variant-numeric:tabular-nums}
+.quote{padding:12px 16px;border-left:5px solid var(--pink);background:var(--pink-soft);border-radius:0 var(--wob-s) var(--wob-s) 0;font-size:17px}
+.formula{font:700 24px/1.35 var(--hand);padding:14px 16px;border:2px dashed var(--blue);border-radius:var(--wob-s);background:var(--blue-soft)}
+.prompt{display:grid;gap:8px;padding:14px 16px;border:2px solid var(--rule);border-radius:var(--wob-s);background:var(--paper-2)}
+.hrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+
+.chip{display:inline-block;justify-self:start;font-size:12px;font-weight:800;padding:1px 10px;border-radius:999px;background:var(--blue-soft);color:var(--ink);border:1.5px solid var(--rule)}
+.ptext{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.ptext.open{display:block;overflow:visible}
+
+/* cute + motion */
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-4px) rotate(3deg)}}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(12px,-26px) rotate(16deg)}}
+@keyframes twinkle{0%,100%{opacity:1;scale:1}50%{opacity:.5;scale:.78}}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes wiggle{0%,84%,100%{transform:rotate(0)}89%{transform:rotate(-14deg)}95%{transform:rotate(11deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes tpop{from{opacity:0;transform:translateX(-50%) scale(.85)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+.floaties{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fl{position:absolute;width:var(--s,24px);height:var(--s,24px);opacity:.55;fill:currentColor;animation:drift var(--d,10s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+.fl.c{color:var(--green)}.fl.s{color:#E9B84A}.fl.p{color:var(--pink)}.fl.b{color:var(--blue)}
+.app{z-index:1}
+.brand .logo{width:50px;height:50px;flex:none;display:inline-grid;animation:bob 3.2s ease-in-out infinite;-webkit-text-stroke:0}
+.brand .logo svg,.brand .logo img{width:100%;height:100%;object-fit:contain;border-radius:14px;color:inherit;-webkit-text-stroke:0}
+.hbtns{display:flex;gap:8px}
+.star{animation:twinkle 3s ease-in-out infinite}.star.b{animation-delay:.9s}.star.c{animation-delay:1.7s}
+.sheet{animation:rise .5s ease both}
+.btn{transition:transform .14s ease,background .14s}
+.btn:hover{transform:translateY(-2px) rotate(-.6deg)}
+.btn:active{transform:scale(.95)}
+.chk:active .box{transform:scale(.85)}
+.box{transition:transform .14s}
+.nav button[aria-current="page"] svg{animation:wiggle 2.8s ease-in-out infinite}
+.pd.done svg,.cd.full svg{animation:sway 3.4s ease-in-out infinite;transform-origin:50% 88%}
+.toast{animation:tpop .3s ease both}
+.dock{position:fixed;right:12px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:30;width:min(340px,calc(100vw - 24px));background:var(--paper);border:2px solid var(--outline);border-radius:var(--wob);padding:8px 10px 10px;display:grid;gap:6px;box-shadow:0 6px 0 rgba(75,59,61,.12)}
+.dock iframe{width:100%;border:0;border-radius:12px;display:block}
+.dock.min iframe{height:0!important}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:8px;font:700 19px var(--hand);color:var(--blue)}
+.dh .dbtns{display:flex;gap:6px}
+.lgrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.lgprev{width:64px;height:64px;display:grid}
+.lgprev svg,.lgprev img{width:100%;height:100%;object-fit:contain;border-radius:14px}
+.sset{display:grid;gap:10px;padding-top:6px;border-top:1.5px dashed var(--rule)}
+@media(min-width:860px){.dock{bottom:20px}}
+html[data-anim="off"] *,html[data-anim="off"] *::before,html[data-anim="off"] *::after{animation:none!important}
+html[data-anim="off"] .floaties{display:none}
+.ov{position:fixed;inset:0;z-index:40;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center}
+.panel{background:var(--paper);border:2px solid var(--outline);width:min(580px,100%);max-height:88%;overflow:auto;border-radius:22px 22px 0 0;display:grid;gap:14px;
+  padding:20px max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:50;max-width:calc(100% - 32px);
+  background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:var(--wob-s);font-weight:700;text-align:center}
+
+@media(min-width:860px){
+  body{padding-block:44px 48px}
+  .app{grid-template-columns:200px minmax(0,1fr);gap:18px 28px}
+  .nav{position:sticky;top:20px;align-self:start;flex-direction:column;gap:6px;background:none;border:0;padding:0;z-index:1}
+  .nav button{flex-direction:row;justify-content:flex-start;gap:12px;padding:0 14px;min-height:50px;font-size:16px;border:2px solid transparent}
+  .nav button[aria-current="page"]{background:var(--paper);border-color:var(--outline)}
+  .sheet{padding:30px 34px 34px}
+  .toast{bottom:28px}
+  .ov{align-items:center}
+  .panel{border-radius:22px}
+  .index{padding-left:64px}.index::before{left:52px}.pg{left:-64px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="clover" viewBox="0 0 24 24">
+      <g fill="currentColor">
+        <path id="leaf" d="M12 12C9.2 9.8 8.2 7.6 8.8 5.6 9.5 3.4 12 3.6 12 6.2 12 3.6 14.5 3.4 15.2 5.6 15.8 7.6 14.8 9.8 12 12Z"/>
+        <use href="#leaf" transform="rotate(90 12 12)"/>
+        <use href="#leaf" transform="rotate(180 12 12)"/>
+        <use href="#leaf" transform="rotate(270 12 12)"/>
+      </g>
+      <path d="M12 12Q13.2 17 16.5 21" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="mascot" viewBox="0 0 64 64"><g stroke="var(--outline)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+<path d="M9 34 L12 6 Q22 8 31 21Z" fill="#F2A65A"/><path d="M55 34 L52 6 Q42 8 33 21Z" fill="#F2A65A"/>
+<path d="M7 40 Q7 22 32 21 Q57 22 57 40 Q57 58 32 59 Q7 58 7 40Z" fill="#F2A65A"/></g>
+<path d="M14 25 L14.8 12.5 Q20.5 14.5 25.5 21.5Z" fill="#F8C9D4"/><path d="M50 25 L49.2 12.5 Q43.5 14.5 38.5 21.5Z" fill="#F8C9D4"/>
+<path d="M10 43 Q22 38 32 48 Q42 38 54 43 Q51 56 32 57 Q13 56 10 43Z" fill="#FFF8EE"/>
+<path d="M7 40 Q7 22 32 21 Q57 22 57 40 Q57 58 32 59 Q7 58 7 40Z" fill="none" stroke="var(--outline)" stroke-width="2.6" stroke-linejoin="round"/>
+<ellipse cx="16" cy="45" rx="4" ry="2.5" fill="#F8C9D4"/><ellipse cx="48" cy="45" rx="4" ry="2.5" fill="#F8C9D4"/>
+<path d="M19 37 q3.2-4 6.4 0M38.6 37 q3.2-4 6.4 0M32 49.5 q0 3 -3 3M32 49.5 q0 3 3 3" fill="none" stroke="var(--outline)" stroke-width="2.3" stroke-linecap="round"/>
+<ellipse cx="32" cy="47.2" rx="2.7" ry="2" fill="var(--outline)"/>
+<g stroke="#2F7D4F" stroke-width="1.5"><circle cx="32" cy="11.7" r="3.4" fill="#CDECD5"/><circle cx="35.3" cy="15" r="3.4" fill="#CDECD5"/><circle cx="32" cy="18.3" r="3.4" fill="#CDECD5"/><circle cx="28.7" cy="15" r="3.4" fill="#CDECD5"/></g>
+<g fill="#CDECD5"><circle cx="32" cy="11.7" r="3"/><circle cx="35.3" cy="15" r="3"/><circle cx="32" cy="18.3" r="3"/><circle cx="28.7" cy="15" r="3"/></g><circle cx="32" cy="15" r="1.1" fill="#2F7D4F"/></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.3L12 17l-5.6 3.1 1.3-6.3L3 9.5l6.3-.7z"/></symbol>
+  </defs>
+</svg>
+
+<div class="floaties" aria-hidden="true">
+  <svg class="fl c" style="left:5%;top:22%;--s:30px;--d:11s"><use href="#clover"/></svg>
+  <svg class="fl s" style="left:88%;top:30%;--s:20px;--d:8s;--dl:1s"><use href="#star"/></svg>
+  <svg class="fl p" style="left:12%;top:68%;--s:22px;--d:9s;--dl:2s"><use href="#star"/></svg>
+  <svg class="fl c" style="left:92%;top:72%;--s:34px;--d:12s;--dl:.5s"><use href="#clover"/></svg>
+  <svg class="fl b" style="left:48%;top:88%;--s:18px;--d:10s;--dl:3s"><use href="#star"/></svg>
+  <svg class="fl c" style="left:70%;top:12%;--s:22px;--d:13s;--dl:2.4s"><use href="#clover"/></svg>
+  <svg class="fl s" style="left:30%;top:8%;--s:16px;--d:7s;--dl:1.4s"><use href="#star"/></svg>
+</div>
+<div class="lace" aria-hidden="true"></div>
+<div class="app">
+  <header class="top">
+    <h1 class="brand"><span class="logo" id="logo"></span>Devotion Notebook</h1>
+    <span class="sync" id="sync" role="status" data-s="local">Saved on this device</span>
+    <div class="hbtns"><button class="btn quiet sm" data-act="music">♪ Music</button><button class="btn quiet sm" data-act="opensettings">Settings</button></div>
+    <svg class="star a" aria-hidden="true"><use href="#star"/></svg>
+    <svg class="star b" aria-hidden="true"><use href="#star"/></svg>
+    <svg class="star c" aria-hidden="true"><use href="#star"/></svg>
+  </header>
+  <nav class="nav" id="nav" aria-label="Sections"></nav>
+  <main class="sheet" id="view"></main>
+</div>
+<div class="ov" id="ov" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="ov" id="ov2" hidden></div>
+<div class="dock" id="dock" hidden></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var pad=function(n){return String(n).padStart(2,'0')};
+var ymd=function(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+var parse=function(k){var p=k.split('-').map(Number);return new Date(p[0],p[1]-1,p[2],12)};
+var addDays=function(d,n){var x=new Date(d.getTime());x.setDate(x.getDate()+n);return x};
+var DAY=86400000;
+var dnum=function(k){var p=k.split('-').map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/DAY)};
+var fmtLong=function(d){return d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long'})};
+var fmtShort=function(k){return parse(k).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})};
+var uid=function(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4)};
+var clone=function(o){return JSON.parse(JSON.stringify(o))};
+var clover=function(){return '<svg aria-hidden="true"><use href="#clover"/></svg>'};
+
+/* ---------- Bible data ---------- */
+var BK=[['Genesis','GEN',50],['Exodus','EXO',40],['Leviticus','LEV',27],['Numbers','NUM',36],['Deuteronomy','DEU',34],['Joshua','JOS',24],['Judges','JDG',21],['Ruth','RUT',4],['1 Samuel','1SA',31],['2 Samuel','2SA',24],['1 Kings','1KI',22],['2 Kings','2KI',25],['1 Chronicles','1CH',29],['2 Chronicles','2CH',36],['Ezra','EZR',10],['Nehemiah','NEH',13],['Esther','EST',10],['Job','JOB',42],['Psalms','PSA',150],['Proverbs','PRO',31],['Ecclesiastes','ECC',12],['Song of Solomon','SNG',8],['Isaiah','ISA',66],['Jeremiah','JER',52],['Lamentations','LAM',5],['Ezekiel','EZK',48],['Daniel','DAN',12],['Hosea','HOS',14],['Joel','JOL',3],['Amos','AMO',9],['Obadiah','OBA',1],['Jonah','JON',4],['Micah','MIC',7],['Nahum','NAM',3],['Habakkuk','HAB',3],['Zephaniah','ZEP',3],['Haggai','HAG',2],['Zechariah','ZEC',14],['Malachi','MAL',4],
+['Matthew','MAT',28],['Mark','MRK',16],['Luke','LUK',24],['John','JHN',21],['Acts','ACT',28],['Romans','ROM',16],['1 Corinthians','1CO',16],['2 Corinthians','2CO',13],['Galatians','GAL',6],['Ephesians','EPH',6],['Philippians','PHP',4],['Colossians','COL',4],['1 Thessalonians','1TH',5],['2 Thessalonians','2TH',3],['1 Timothy','1TI',6],['2 Timothy','2TI',4],['Titus','TIT',3],['Philemon','PHM',1],['Hebrews','HEB',13],['James','JAS',5],['1 Peter','1PE',5],['2 Peter','2PE',3],['1 John','1JN',5],['2 John','2JN',1],['3 John','3JN',1],['Jude','JUD',1],['Revelation','REV',22]];
+var books=BK.map(function(b,i){return {name:b[0],code:b[1],n:b[2],ot:i<39}});
+var byName={};books.forEach(function(b){byName[b.name]=b});
+var TOTAL=books.reduce(function(s,b){return s+b.n},0);
+var VERS={NIV:'111',ESV:'59',KJV:'1',NLT:'116',NKJV:'114',CSB:'1713',MSG:'97'};
+var ALIAS={psalm:'Psalms',ps:'Psalms',psa:'Psalms',pslm:'Psalms',song:'Song of Solomon',songofsongs:'Song of Solomon',sos:'Song of Solomon',revelations:'Revelation',phil:'Philippians',philem:'Philemon',jn:'John',mt:'Matthew',mk:'Mark',lk:'Luke',ex:'Exodus',dt:'Deuteronomy',prov:'Proverbs',eccl:'Ecclesiastes',heb:'Hebrews',jas:'James','1jn':'1 John','2jn':'2 John','3jn':'3 John'};
+var norm=function(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'')};
+function findBook(raw){
+  var n=norm(raw);if(!n)return null;
+  if(ALIAS[n])return byName[ALIAS[n]];
+  var b=books.filter(function(x){return norm(x.name)===n})[0]||books.filter(function(x){return x.code.toLowerCase()===n})[0];
+  if(b)return b;
+  if(n.length>=3)b=books.filter(function(x){return norm(x.name).indexOf(n)===0})[0];
+  return b||null;
+}
+function parseRef(s){
+  var m=String(s||'').match(/^\s*((?:[1-3]\s*)?[A-Za-z][A-Za-z.\s]*?)\s*(\d{1,3})(?:\s*[:.]\s*(\d{1,3})(?:\s*[-–—]\s*(\d{1,3}))?)?/);
+  if(!m)return null;
+  var b=findBook(m[1]);if(!b)return null;
+  var ch=+m[2];if(ch<1||ch>b.n)return null;
+  return {book:b,ch:ch,v1:m[3]?+m[3]:null,v2:m[4]?+m[4]:null};
+}
+function refLabel(r){return r.book.name+' '+r.ch+(r.v1?':'+r.v1+(r.v2?'–'+r.v2:''):'')}
+function bibleUrl(r){
+  var S=state.settings,b=r.book,verses=r.v1?(r.v1+(r.v2?'-'+r.v2:'')):'';
+  if(S.app==='custom'&&/^https?:\/\//i.test(S.template||'')){
+    return S.template.replace(/\{book\}/g,encodeURIComponent(b.name)).replace(/\{code\}/g,b.code).replace(/\{chapter\}/g,r.ch).replace(/\{verses\}/g,verses);
+  }
+  if(S.app==='biblegateway'){
+    return 'https://www.biblegateway.com/passage/?search='+encodeURIComponent(b.name+' '+r.ch+(r.v1?':'+verses:''))+'&version='+encodeURIComponent(S.version);
+  }
+  return 'https://www.bible.com/bible/'+(VERS[S.version]||'111')+'/'+b.code+'.'+r.ch+(r.v1?'.'+verses:'');
+}
+function appName(){var a=state.settings.app;return a==='biblegateway'?'Bible Gateway':a==='custom'?'your Bible app':'YouVersion'}
+
+/* ---------- Plan content ---------- */
+var HABITS=[{id:'ritual',t:'Entry ritual: phone away, quiet spot'},{id:'pray',t:'Opened with prayer'},{id:'read',t:'Read slowly with one cross-reference'},{id:'journal',t:'Journaled: observation, insight, action'},{id:'share',t:'Shared one takeaway'}];
+var WEEKS=[['Settle in','Build the entry ritual. Same time, same place, phone out of reach. Finish a short session instead of skipping a long one.'],['Slow down','Read the passage twice. Check one cross-reference or context note before you write anything.'],['Live it','Write an If/Then every day, then watch for the moment it applies (James 1:22).'],['Share it','Tell one person one takeaway each day. Use a prompt from the Plan tab.']];
+var STAGES=[['Center & pray',0.10,'Settle in and pray. Do not open the text yet.'],['Read & cross-reference',0.40,'Read slowly. Check one context note or cross-reference.'],['Journal & process',0.30,'Write: observation, conviction or insight, action.'],['Close & carry',0.20,'Write one If/Then for today.']];
+var JOURNAL=[['Observation','What does the text say? What stands out?'],['Conviction or insight','What is God showing or challenging in me?'],['Action','What will I do about it?']];
+var PROMPTS=['Something I read this morning stuck with me: ___. Has anything like that come up for you lately?','I am trying one small thing today because of my reading: ___. Can I tell you tonight how it went?'];
+
+/* ---------- State ---------- */
+var DEFCATS=[{id:'preaching',t:'Preaching'},{id:'read-short',t:'Scripture reading (short)'},{id:'read-long',t:'Scripture reading (long)'},{id:'yt',t:'YouTube video'},{id:'letter',t:'Letter to God'},{id:'prayer',t:'Prayer'}];
+var SKILL_TXT=["---","name: devotion","description: Formats biblical devotional notes using contextual criticism. Trigger when the user mentions devotion, Bible study notes, or analyzing a scripture passage for a sermon/devotional.","---","","# Devotion Analysis","","Analyze scripture passages or sermon texts using contextual criticism to create scannable, clear, and highly accessible devotional notes.","","## When to Use","","Use this skill whenever the user mentions “devotion”, asks for Bible study notes, or requests contextual analysis of a scripture passage or sermon text.","","## Structure & Layout","","Output all devotional analyses using the following format:","","* **Book / Sermon Title:** [Name of the book, passage, or sermon]","* **Author & Historical Context:** [Author/preacher background, target audience, historical setting, and literary context]","* **Key Verse:** [The central verse, quoted accurately]","* **Main Message:** [Core theological message summarized in 1–2 clear sentences]","* **Themes:** [3–4 central themes]","* **Interesting Insights:** [Notable historical, cultural, or textual details revealed via contextual criticism]","* **Word Bank & Etymology:** [1–3 key original Hebrew or Greek words with simple definitions and origins]","* **Personal Application:** [Concrete, practical takeaways for daily living]","","## Guidelines","","* **Tone & Language:** Maintain simple, accessible language that is easy to understand without sacrificing historical or theological accuracy.","* **Contextual Criticism:** Include specific cultural, historical, and literary background facts to illuminate the passage.","* **Brevity:** Keep sections concise, well-structured, and scannable.","","Passage or sermon text:",""].join('\n');
+var DEFPROMPTS=[
+{id:'p-skill',t:'Devotion analysis (full skill)',cat:'',text:SKILL_TXT},
+{id:'p-short',t:'Short reading: quick notes',cat:'read-short',text:"Use the devotion format, but keep it very short. For this short passage give me: the key verse, the main message in 1–2 sentences, one interesting historical or cultural detail, one Hebrew or Greek word with a simple definition, and one concrete application for today. Use simple language.\n\nPassage:\n"},
+{id:'p-long',t:'Long reading: overview',cat:'read-long',text:"Use the devotion format for this long reading (a chapter or more). Split it into sections with a one-line summary each, then give me the author and historical context, the key verse, 3–4 themes, the main message in 1–2 sentences, and one practical application. Keep it scannable.\n\nPassage:\n"},
+{id:'p-pre',t:'Preaching: sermon notes',cat:'preaching',text:"Use the devotion format to analyze this sermon. Cover: sermon title and preacher background, the main scripture text and its context, the big idea in one sentence, the outline of points, the key verse, themes, and a personal application. Keep the language simple.\n\nSermon notes or transcript:\n"},
+{id:'p-yt',t:'YouTube video: devotion notes',cat:'yt',text:"Turn this video into devotion notes. Give me: speaker and channel, the main passage, the main message in 1–2 sentences, 3 takeaways, one verse worth memorizing, and one way to apply it today.\n\nTranscript or notes:\n"},
+{id:'p-letter',t:'Letter to God: starter prompts',cat:'letter',text:"Help me start a letter to God. Give me 5 gentle prompts: what I am thankful for, what is weighing on me, what I need, who I am praying for, and what I want to say to Him. Then suggest one verse that fits what I am going through.\n\nWhat is on my heart:\n"},
+{id:'p-prayer',t:'Prayer: outline from a passage',cat:'prayer',text:"Give me a short prayer outline (Adoration, Confession, Thanksgiving, Supplication) based on this passage. Keep each part to 1–2 lines and use simple words.\n\nPassage:\n"}
+];
+var defCtx=function(){return {win:20,when:'',place:'',friction:'',focus:'',outlet:''}};
+var defSettings=function(){return {app:'youversion',version:'NIV',template:'',book:'John',examples:true,start:'',music:'',logo:'',anim:true,ctx:defCtx(),habits:HABITS.map(function(h){return {id:h.id,t:h.t}}),cats:clone(DEFCATS),prompts:clone(DEFPROMPTS)}};
+function mergeSettings(v){var s=Object.assign(defSettings(),v||{});s.ctx=Object.assign(defCtx(),(v&&v.ctx)||{});if(!Array.isArray(s.habits)||!s.habits.length)s.habits=defSettings().habits;if(!Array.isArray(s.cats))s.cats=clone(DEFCATS);if(!Array.isArray(s.prompts))s.prompts=clone(DEFPROMPTS);return s}
+var state={settings:defSettings(),days:{},read:{},entries:{list:[]}};
+var KEYS=['settings','days','read','entries'];
+function lsGet(k){try{var v=localStorage.getItem('dn-'+k);return v?JSON.parse(v):null}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem('dn-'+k,JSON.stringify(v))}catch(e){}}
+KEYS.forEach(function(k){var v=lsGet(k);if(v){state[k]=k==='settings'?mergeSettings(v):v}});
+if(!state.entries||!Array.isArray(state.entries.list))state.entries={list:[]};
+
+var store={refs:{}},dirty={},writing={},timers={},got={},syncState='local';
+var SYNC={signedout:'Not signed in. Saved on this device',local:'Saved on this device',loading:'Loading your notebook…',saving:'Saving…',saved:'Synced to your account',error:'Could not save yet',slow:'Cannot reach your account. Saved on this device'};
+function setSync(s){syncState=s;var el=$('#sync');el.dataset.s=(s==='slow'?'local':s==='loading'?'local':s);el.textContent=SYNC[s]}
+function save(k){
+  lsSet(k,state[k]);
+  if(!store.refs[k])return;
+  setSync('saving');dirty[k]=true;clearTimeout(timers[k]);
+  timers[k]=setTimeout(function(){flush(k)},500);
+}
+function flush(k){
+  if(writing[k])return Promise.resolve();
+  writing[k]=true;
+  var loop=function(){
+    if(!dirty[k])return Promise.resolve();
+    dirty[k]=false;
+    return store.refs[k].set(clone(state[k])).then(loop);
+  };
+  return loop().then(function(){
+    writing[k]=false;
+    var busy=KEYS.some(function(x){return dirty[x]||writing[x]});
+    if(!busy)setSync('saved');
+  },function(){writing[k]=false;dirty[k]=false;setSync('error')});
+}
+function applyRemote(k,snap){
+  var data=clone(snap.data()),next=k==='settings'?mergeSettings(data):data;
+  if(k==='entries'&&!Array.isArray(next.list))next.list=[];
+  if(JSON.stringify(next)!==JSON.stringify(state[k])){state[k]=next;lsSet(k,next);if(k==='settings'){tmReset();logoKey=null}render();if(k==='settings'){paintDock();if(setOpen)renderSettings()}}
+}
+function subscribe(k){
+  (store.unsubs=store.unsubs||{})[k]=store.refs[k].onSnapshot(function(snap){
+    if(snap.metadata.hasPendingWrites)return;
+    if(!snap.metadata.fromCache){got[k]=true;if(KEYS.every(function(x){return got[x]})&&!KEYS.some(function(x){return dirty[x]||writing[x]}))setSync('saved')}
+    if(dirty[k]||writing[k])return;
+    if(snap.exists)applyRemote(k,snap);
+    else if(!snap.metadata.fromCache&&lsGet(k)!==null)save(k);
+  },function(){setSync('slow')});
+}
+function initDb(){
+  var c=window.claude;
+  if(!c||!c.use){setSync('local');return}
+  Promise.all([c.use('db'),c.use('user')]).then(function(r){
+    var db=r[0],user=r[1];
+    if(!db||!user)return null;
+    return user.id().then(function(id){return id?{db:db,id:id}:null});
+  }).then(function(x){
+    if(!x){setSync('local');return}
+    KEYS.forEach(function(k){store.refs[k]=x.db.doc('data/users/'+x.id+'/'+k)});
+    setSync('loading');
+    KEYS.forEach(subscribe);
+    setTimeout(function(){if(syncState==='loading')setSync('slow')},10000);
+  }).catch(function(){setSync('local')});
+}
+
+/* ---------- Derived ---------- */
+function hset(){var s={};state.settings.habits.forEach(function(h){s[h.id]=1});return s}
+function dayCount(k){var s=hset();return (state.days[k]||[]).filter(function(id){return s[id]}).length}
+function dayDone(k){return dayCount(k)>0||state.entries.list.some(function(e){return e.date===k})}
+function doneKeys(){var o={};Object.keys(state.days).forEach(function(k){if(dayCount(k)>0)o[k]=1});state.entries.list.forEach(function(e){o[e.date]=1});return Object.keys(o)}
+function streak(){
+  var d=new Date();d.setHours(12);
+  if(!dayDone(ymd(d)))d=addDays(d,-1);
+  var n=0;while(dayDone(ymd(d))){n++;d=addDays(d,-1)}
+  return n;
+}
+function longest(){
+  var a=doneKeys().map(dnum).sort(function(x,y){return x-y}),best=0,run=0,prev=null;
+  a.forEach(function(n){run=(prev!==null&&n===prev+1)?run+1:1;if(run>best)best=run;prev=n});
+  return best;
+}
+function nextPage(){var p=state.entries.list.map(function(e){return Number(e.page)}).filter(function(n){return n>0});return p.length?Math.max.apply(null,p)+1:1}
+function nextUnread(name){var b=byName[name],r={};(state.read[name]||[]).forEach(function(n){r[n]=1});for(var i=1;i<=b.n;i++)if(!r[i])return i;return null}
+function missedInfo(){
+  var today=ymd(new Date());if(dayDone(today))return null;
+  var keys=doneKeys().filter(function(k){return k<today}).sort();
+  if(!keys.length)return null;
+  var gap=dnum(today)-dnum(keys[keys.length-1]);
+  return gap>=2?{n:gap-1}:null;
+}
+function startInfo(){
+  var s=state.settings.start;if(!s)return null;
+  var n=dnum(ymd(new Date()))-dnum(s);
+  if(n<0)return null;
+  return {n:n,day:Math.min(n+1,30),over:n>=30,week:Math.min(3,Math.floor(Math.min(n,29)/7))};
+}
+function examples(){
+  var t=new Date(),mk=function(n,page,ref,title,xr,f,iff,thn){return {id:'ex'+page,ex:true,date:ymd(addDays(t,-n)),page:page,title:title,ref:ref,cat:['read-short','preaching','prayer'][page-1],f:f}};
+  return [
+    mk(3,1,'Psalm 23','The Lord is my shepherd','Compare John 10:11, where Jesus calls himself the good shepherd.',['A shepherd feeds, guides and protects. David writes as someone who lived it.','I keep rehearsing what I lack. This psalm starts with what I already have.','Name three things I have been given this week before I open my email.'],'my mind starts listing what is missing','I will stop and thank God for one thing already given'),
+    mk(2,2,'John 15:1-8','Staying connected','Isaiah 5 uses the vineyard picture too; Jesus is the true vine.',['Branches do not strain to produce fruit. They stay attached.','I try to bear fruit by effort and skip the staying part.','Sit for two quiet minutes before the day begins.'],'I feel pressure to prove myself at work','I will pause, pray one sentence and then carry on'),
+    mk(1,3,'Philippians 4:4-9','Anxious for nothing','Verses 6 and 7 echo 1 Peter 5:7 about casting every worry on him.',['Paul writes from prison and still tells them to pray with thanks.','Worry and thanks cannot sit in the same sentence for long.','Pray about the one thing on my mind, with a thank-you included.'],'a worry comes back during the afternoon','I will pray about it right then, with one thing to thank him for')
+  ];
+}
+
+/* ---------- Draft ---------- */
+function newDraft(date){return {id:null,date:date,page:nextPage(),pageAuto:true,title:'',cat:'',ref:'',f:['','',''],mark:true}}
+var draft=newDraft(ymd(new Date()));
+var cur='log',openId=null,confirmId=null,sortBy='page',query='',catFilter='',pCat='',pOpen=null,pform={id:null,t:'',cat:'',text:''},sel=null,calM=(function(){var n=new Date();return {y:n.getFullYear(),m:n.getMonth()}})();
+var VIEWS_LIST=['log','contents','prompts','plan','tracker','bible'];
+
+/* ---------- Views ---------- */
+function refPrev(){
+  var d=draft,r=parseRef(d.ref);
+  if(!d.ref.trim())return '<span class="muted">Type a passage such as John 3:16-18 or Psalm 23.</span>';
+  if(!r)return '<span class="muted">That did not match a book yet. You can still save the entry.</span>';
+  return '<a href="'+esc(bibleUrl(r))+'" target="_blank" rel="noopener">Open '+esc(refLabel(r))+' in '+esc(appName())+' ↗</a>'+
+    '<label class="chk inline"><input type="checkbox" id="mark" data-d="mark"'+(d.mark?' checked':'')+'><span class="box" aria-hidden="true"></span><span class="lbl">Mark '+esc(r.book.name+' '+r.ch)+' as read in the Bible tab</span></label>';
+}
+function catName(id){var c=state.settings.cats.filter(function(x){return x.id===id})[0];return c?c.t:''}
+function catOpts(sel,blank){return '<option value="">'+blank+'</option>'+state.settings.cats.map(function(c){return '<option value="'+esc(c.id)+'"'+(c.id===sel?' selected':'')+'>'+esc(c.t)+'</option>'}).join('')}
+function viewLog(){
+  var d=draft,dt=parse(d.date),today=ymd(new Date()),isToday=d.date===today;
+  var hs=state.settings.habits,done={};(state.days[d.date]||[]).forEach(function(x){done[x]=1});
+  var ws=addDays(dt,-dt.getDay()),week='';
+  for(var i=0;i<7;i++){var x=addDays(ws,i),k=ymd(x);
+    week+='<button class="wd'+(k===d.date?' sel':'')+(k===today?' today':'')+(dayDone(k)?' done':'')+'" data-act="wk" data-d="'+k+'" aria-pressed="'+(k===d.date)+'" aria-label="'+esc(fmtLong(x))+(dayDone(k)?', done':'')+'"><small>'+x.toLocaleDateString(undefined,{weekday:'narrow'})+'</small><b>'+x.getDate()+'</b></button>';
+  }
+  var si=startInfo(),mi=isToday?missedInfo():null,banner='';
+  if(mi)banner+='<aside class="note g"><h4>Welcome back</h4><p>You were away '+mi.n+(mi.n===1?' day':' days')+'. There is nothing to catch up on. Start with today and keep it short: pray, read one passage, write one If/Then.</p><div class="acts"><button class="btn sm" data-act="nav" data-v="plan">See the restart plan</button></div></aside>';
+  if(si&&!si.over)banner+='<aside class="note b"><p class="lab">Day '+si.day+' of 30 · Week '+(si.week+1)+': '+esc(WEEKS[si.week][0])+'</p><p>'+esc(WEEKS[si.week][1])+'</p></aside>';
+  else if(!si)banner+='<aside class="note b"><p>Want a guided month? <button class="btn sm" data-act="startplan">Start my 30 days today</button></p></aside>';
+  var checks=hs.map(function(h){return '<li><label class="chk"><input type="checkbox" id="h-'+esc(h.id)+'" data-habit="'+esc(h.id)+'"'+(done[h.id]?' checked':'')+'><span class="box" aria-hidden="true"></span><span class="lbl">'+esc(h.t)+'</span></label></li>'}).join('');
+  var jr=JOURNAL.map(function(f,i){return '<label class="fld"><span class="lab">'+f[0]+'</span><textarea id="f'+i+'" data-fi="'+i+'" rows="3" placeholder="'+esc(f[1])+'">'+esc(d.f[i]||'')+'</textarea></label>'}).join('');
+  return ''+
+  '<section class="sec"><header><p class="lab">'+(isToday?'Today':dt.getFullYear())+'</p><h2>'+esc(fmtLong(dt))+'</h2></header>'+
+    '<div class="week" role="group" aria-label="This week">'+week+'</div>'+
+    '<div class="datebar"><label class="fld"><span class="lab">Jump to a date</span><input type="date" id="dsel" data-d="date" value="'+esc(d.date)+'"></label>'+(isToday?'':'<button class="btn quiet" data-act="today">Back to today</button>')+'</div>'+
+  '</section>'+banner+
+  '<section class="sec"><header><h3>Today’s checklist</h3><p class="muted">Tick what you did. Any tick counts as a devotion day.</p></header><ul>'+checks+'</ul></section>'+
+  '<section class="sec"><header><p class="lab">'+(d.id?'Editing page '+esc(d.page||''):'Notebook entry')+'</p><h3>What you wrote in your notebook</h3></header>'+
+    '<div class="row2"><label class="fld"><span class="lab">Page</span><input type="number" inputmode="numeric" min="1" id="pg" data-d="page" value="'+esc(d.page)+'"></label>'+
+    '<label class="fld"><span class="lab">Title</span><input type="text" id="ttl" data-d="title" value="'+esc(d.title)+'" placeholder="A few words, like in your contents page"></label></div>'+
+    '<label class="fld"><span class="lab">Category</span><select id="cat" data-d="cat">'+catOpts(d.cat,'No category')+'</select></label>'+
+    '<p class="muted">Need help analysing a passage? <button class="btn quiet sm" data-act="nav" data-v="prompts">Open prompt bank</button></p>'+
+    '<label class="fld"><span class="lab">Passage</span><input type="text" id="ref" data-d="ref" value="'+esc(d.ref)+'" placeholder="John 15:1-8" autocomplete="off"></label>'+
+    '<div class="refprev" id="refprev">'+refPrev()+'</div>'+
+    jr+
+  '</section>'+
+  '<section class="sec"><header><h3>Save your entry</h3></header>'+
+    '<div class="acts"><button class="btn primary" data-act="save">'+(d.id?'Update entry':'Save to Contents')+'</button>'+(d.id?'<button class="btn quiet" data-act="cancel">Cancel</button>':'<button class="btn quiet" data-act="clear">Clear form</button>')+'</div>'+
+  '</section>';
+}
+function viewContents(){
+  var real=state.entries.list,ex=!real.length&&state.settings.examples;
+  var list=(ex?examples():real).slice(),q=query.trim().toLowerCase();
+  if(catFilter)list=list.filter(function(e){return e.cat===catFilter});
+  if(q)list=list.filter(function(e){return (e.title+' '+e.ref+' '+catName(e.cat)+' '+(e.f||[]).join(' ')).toLowerCase().indexOf(q)>=0});
+  if(sortBy==='page')list.sort(function(a,b){var pa=a.page==null?1e9:a.page,pb=b.page==null?1e9:b.page;return pa-pb||a.date.localeCompare(b.date)});
+  else list.sort(function(a,b){return b.date.localeCompare(a.date)});
+  var rows=list.map(function(e){
+    var open=openId===e.id,r=parseRef(e.ref),det='';
+    if(open){
+      var parts=[];
+      JOURNAL.forEach(function(j,i){if(e.f&&e.f[i])parts.push([j[0],e.f[i]])});
+      det='<div class="ix-detail">'+(parts.length?parts.map(function(p){return '<div class="dline"><h4>'+esc(p[0])+'</h4><p>'+esc(p[1])+'</p></div>'}).join(''):'<p class="muted">No notes were written for this entry.</p>')+
+        '<div class="acts">'+(r?'<a class="btn quiet sm" href="'+esc(bibleUrl(r))+'" target="_blank" rel="noopener">Open passage ↗</a>':'')+
+        (e.ex?'':'<button class="btn quiet sm" data-act="edit" data-id="'+esc(e.id)+'">Edit</button><button class="btn quiet sm danger" data-act="del" data-id="'+esc(e.id)+'">'+(confirmId===e.id?'Tap again to delete':'Delete')+'</button>')+'</div></div>';
+    }
+    return '<li class="ix"><span class="pg">'+(e.page==null?'–':esc(e.page))+'</span>'+
+      '<button class="ix-main" data-act="toggle" data-id="'+esc(e.id)+'" aria-expanded="'+open+'"><span class="ix-line"><span class="ttl">'+esc(e.title||e.ref||'Untitled')+'</span><span class="leader"></span><time>'+esc(fmtShort(e.date))+'</time></span>'+(e.title&&e.ref?'<span class="ix-ref">'+esc(e.ref)+'</span>':'')+(e.cat&&catName(e.cat)?'<span class="chip">'+esc(catName(e.cat))+'</span>':'')+'</button>'+det+'</li>';
+  }).join('');
+  var body=list.length?'<ul class="index">'+rows+'</ul>':'<div class="empty"><p>'+((q||catFilter)?'Nothing matches that search.':'Your contents page is empty.')+'</p>'+((q||catFilter)?'':'<button class="btn primary" data-act="newentry">Add your first entry</button>')+'</div>';
+  return '<section class="sec"><header><p class="lab">'+(ex?'Examples':real.length+(real.length===1?' entry':' entries'))+'</p><h2>Table of contents</h2></header>'+
+    (ex?'<aside class="note"><p>These three rows are examples. Save your first entry and they disappear.</p></aside>':'')+
+    '<div class="datebar"><label class="fld"><span class="lab">Search</span><input type="text" id="q" value="'+esc(query)+'" placeholder="Title, passage or notes" autocomplete="off"></label>'+
+    '<label class="fld"><span class="lab">Category</span><select id="cf" data-cf="1">'+catOpts(catFilter,'All categories')+'</select></label>'+
+    '<div class="seg" role="group" aria-label="Sort by"><button data-act="sort" data-v="page" aria-pressed="'+(sortBy==='page')+'">By page</button><button data-act="sort" data-v="date" aria-pressed="'+(sortBy==='date')+'">By date</button></div></div>'+
+    '<div><button class="btn primary" data-act="newentry">New entry</button></div>'+body+'</section>';
+}
+function viewTracker(){
+  var today=ymd(new Date()),hs=state.settings.habits,T=hs.length,si=startInfo(),s=state.settings.start;
+  var mk=0,now=new Date(),pre=now.getFullYear()+'-'+pad(now.getMonth()+1);
+  doneKeys().forEach(function(k){if(k.indexOf(pre)===0)mk++});
+  var stats='<div class="stats"><div class="stat"><b>'+streak()+'</b><span>Day streak</span></div><div class="stat"><b>'+longest()+'</b><span>Longest streak</span></div><div class="stat"><b>'+mk+'</b><span>Days this month</span></div><div class="stat"><b>'+state.entries.list.length+'</b><span>Notebook entries</span></div></div>';
+  var patch='';
+  if(s&&dnum(today)-dnum(s)>=0){
+    var cells='';for(var i=0;i<30;i++){
+      var k=ymd(addDays(parse(s),i)),dn=dayDone(k),cls=dn?'done':(k<today?'miss':(k===today?'':'fut'));
+      cells+='<button class="pd '+cls+(k===today?' today':'')+'" data-act="goday" data-d="'+k+'" aria-label="Day '+(i+1)+', '+esc(fmtLong(parse(k)))+(dn?', done':'')+'"><small>'+(i+1)+'</small>'+clover()+'</button>';
+    }
+    patch='<section class="sec"><header><p class="lab">'+(si&&!si.over?'Day '+si.day+' of 30':'30-day round finished')+'</p><h3>Your clover patch</h3><p class="muted">One clover grows for each day you show up. Missed days stay faint and need no catching up.</p></header><div class="patch">'+cells+'</div><div class="acts"><button class="btn quiet sm" data-act="startplan">Restart from today</button></div></section>';
+  }else{
+    patch='<section class="sec"><header><h3>Your clover patch</h3><p class="muted">Start a 30-day round and watch the patch fill in.</p></header><div class="acts"><button class="btn primary" data-act="startplan">Start my 30 days today</button></div></section>';
+  }
+  var y=calM.y,m=calM.m,first=new Date(y,m,1,12),lead=first.getDay(),dim=new Date(y,m+1,0).getDate(),entryDates={};
+  state.entries.list.forEach(function(e){entryDates[e.date]=1});
+  var cal=['S','M','T','W','T','F','S'].map(function(x){return '<span class="h" aria-hidden="true">'+x+'</span>'}).join('');
+  for(var j=0;j<lead;j++)cal+='<span></span>';
+  for(var dd=1;dd<=dim;dd++){
+    var kk=y+'-'+pad(m+1)+'-'+pad(dd),c=dayCount(kk),lvl=c===0?0:(c>=T?4:Math.min(3,Math.ceil(3*c/T)));
+    cal+='<button class="cd'+(lvl===4?' full':lvl?' l'+lvl:'')+(kk===today?' today':'')+'" data-act="goday" data-d="'+kk+'" aria-label="'+esc(fmtLong(parse(kk)))+', '+c+' of '+T+' done"><span>'+dd+'</span>'+(lvl===4?clover():'')+(entryDates[kk]?'<i class="dot"></i>':'')+'</button>';
+  }
+  var days30=[];for(var q=0;q<30;q++)days30.push(ymd(addDays(new Date(),-q)));
+  var hb=hs.map(function(h){var c=days30.filter(function(k){return (state.days[k]||[]).indexOf(h.id)>=0}).length;
+    return '<div class="hb"><span>'+esc(h.t)+'</span><b>'+c+'/30</b><div class="bar"><i style="--w:'+(c/30*100)+'%"></i></div></div>'}).join('');
+  return '<section class="sec"><header><p class="lab">Progress</p><h2>Tracker</h2></header>'+stats+'<p class="muted">A day counts when you tick at least one checklist item or save an entry.</p></section>'+patch+
+    '<section class="sec"><div class="calhead"><button class="btn quiet sm" data-act="calprev" aria-label="Previous month">←</button><h3>'+esc(first.toLocaleDateString(undefined,{month:'long',year:'numeric'}))+'</h3><button class="btn quiet sm" data-act="calnext" aria-label="Next month">→</button></div><div class="cal">'+cal+'</div><p class="muted">A clover means every checklist item was ticked. A pink dot means you saved a notebook entry.</p></section>'+
+    '<section class="sec"><header><h3>Last 30 days by habit</h3></header>'+hb+'</section>';
+}
+function viewBible(){
+  var S=state.settings,b=byName[S.book]||byName.John,nx=nextUnread(b.name),rd=(state.read[b.name]||[]).length;
+  var r={book:b,ch:nx||1,v1:null,v2:null},tr=0,ot=0,ota=0,nt=0,nta=0;
+  books.forEach(function(x){var c=Math.min((state.read[x.name]||[]).length,x.n);tr+=c;if(x.ot){ot+=c;ota+=x.n}else{nt+=c;nta+=x.n}});
+  var opt=books.map(function(x){return '<option value="'+esc(x.name)+'"'+(x.name===b.name?' selected':'')+'>'+esc(x.name)+'</option>'}).join('');
+  var grid=function(ot){return books.filter(function(x){return x.ot===ot}).map(function(x){var c=Math.min((state.read[x.name]||[]).length,x.n);return '<button class="bk" style="--p:'+(c/x.n*100)+'%" data-act="book" data-b="'+esc(x.name)+'"><b>'+esc(x.name)+'</b><small>'+c+' / '+x.n+'</small></button>'}).join('')};
+  var vers=Object.keys(VERS).map(function(v){return '<option'+(S.version===v?' selected':'')+'>'+v+'</option>'}).join('');
+  var app=function(v,l){return '<label><input type="radio" name="app" data-set="app" value="'+v+'"'+(S.app===v?' checked':'')+'>'+l+'</label>'};
+  var cr=S.app==='custom'&&/^https?:\/\//i.test(S.template||'')?'':'';
+  return '<section class="sec"><header><p class="lab">Scripture</p><h2>Bible</h2></header>'+
+    '<div class="note g"><p class="lab">Continue reading</p><h3>'+(nx?esc(b.name+' '+nx):esc(b.name)+' finished')+'</h3><p class="muted">'+rd+' of '+b.n+' chapters read</p>'+
+    '<div class="acts"><a class="btn primary" href="'+esc(bibleUrl(r))+'" target="_blank" rel="noopener">Open in '+esc(appName())+' ↗</a><button class="btn" data-act="usepassage" data-ref="'+esc(b.name+' '+(nx||1))+'">Use for today’s entry</button></div>'+
+    '<label class="fld"><span class="lab">Reading focus</span><select id="bk" data-set="book">'+opt+'</select></label></div></section>'+
+    '<section class="sec"><header><h3>Overall progress</h3><p class="muted">'+tr.toLocaleString()+' of '+TOTAL.toLocaleString()+' chapters</p></header>'+
+    '<div class="bar"><i style="--w:'+(tr/TOTAL*100)+'%"></i></div>'+
+    '<p class="muted">Old Testament '+ot+' / '+ota+' · New Testament '+nt+' / '+nta+'</p></section>'+
+    '<section class="sec"><header><h3>Old Testament</h3></header><div class="bks">'+grid(true)+'</div></section>'+
+    '<section class="sec"><header><h3>New Testament</h3></header><div class="bks">'+grid(false)+'</div></section>'+
+    '<section class="sec"><header><h3>Open passages with</h3><p class="muted">Links open the chapter in your Bible app (YouVersion opens its app when installed) or on the website. Your reading progress is tracked here, not read from the app.</p></header>'+
+    '<div class="radios" role="radiogroup" aria-label="Bible app">'+app('youversion','YouVersion')+app('biblegateway','Bible Gateway')+app('custom','Another Bible app or site')+'</div>'+
+    (S.app==='custom'?'<label class="fld"><span class="lab">Link pattern</span><input type="text" id="tpl" data-set="template" value="'+esc(S.template)+'" placeholder="https://example.org/{code}/{chapter}" autocomplete="off"></label><p class="muted">Use {book}, {code} (like JHN), {chapter} and {verses} in a link from your app. It must start with https://.</p>':
+      '<label class="fld"><span class="lab">Translation</span><select id="ver" data-set="version">'+vers+'</select></label>')+
+    '</section>';
+}
+function viewPlan(){
+  var S=state.settings,c=S.ctx,si=startInfo(),win=Math.max(5,Number(c.win)||20);
+  var wins=[10,15,20,30,45,60].map(function(w){return '<option value="'+w+'"'+(win===w?' selected':'')+'>'+w+' minutes</option>'}).join('');
+  var fmt=function(x){var v=Math.round(x*10)/10;return String(v)};
+  var stages=STAGES.map(function(s){return '<div class="stage"><b class="min">'+fmt(win*s[1])+'<small> min</small></b><div><h4>'+s[0]+' · '+Math.round(s[1]*100)+'%</h4><p class="muted">'+s[2]+'</p></div></div>'}).join('');
+  var hs=S.habits.map(function(h){return '<div class="hrow"><input type="text" id="hn-'+esc(h.id)+'" data-hid="'+esc(h.id)+'" value="'+esc(h.t)+'" aria-label="Checklist item"><button class="btn quiet danger sm" data-act="rmh" data-id="'+esc(h.id)+'" aria-label="Remove '+esc(h.t)+'">Remove</button></div>'}).join('');
+  var fx=function(id,key,label,ph){return '<label class="fld"><span class="lab">'+label+'</span><input type="text" id="ctx-'+key+'" data-ctx="'+key+'" value="'+esc(c[key])+'" placeholder="'+esc(ph)+'"></label>'};
+  var prompts=PROMPTS.map(function(p){return '<div class="prompt"><p>'+esc(p)+'</p><div class="acts"><button class="btn quiet sm" data-act="copy" data-text="'+esc(p)+'">Copy</button></div></div>'}).join('');
+  return ''+
+  '<section class="sec"><header><p class="lab">30-day devotional plan</p><h2>Plan</h2></header>'+
+    '<p>A calm daily rhythm built on eight habits: set aside time, find a quiet place, start with prayer, go slowly, journal, use study notes, do what the passage says, and share it with others. The checklist on the Log tab follows the same habits.</p>'+
+    (si&&!si.over?'<aside class="note b"><p class="lab">Day '+si.day+' of 30 · Week '+(si.week+1)+': '+esc(WEEKS[si.week][0])+'</p><p>'+esc(WEEKS[si.week][1])+'</p></aside>':
+      '<div class="acts"><button class="btn primary" data-act="startplan">Start my 30 days today</button></div>')+
+  '</section>'+
+  '<section class="sec"><header><h3>Make it yours</h3><p class="muted">These answers shape the timings and reminders below.</p></header>'+
+    '<label class="fld"><span class="lab">Time I can set aside</span><select id="ctx-win" data-ctx="win">'+wins+'</select></label>'+
+    fx('w','when','When','6:30 AM before the house wakes up')+fx('p','place','Where','Corner chair by the window')+
+    fx('f','friction','Biggest friction','Checking my phone, rushing to finish')+fx('s','focus','Scripture focus','Gospel of Mark, or Psalms on anxiety')+fx('o','outlet','Who I can share with','Small group, spouse, a friend by text')+
+  '</section>'+
+  '<section class="sec"><header><p class="lab">Under 2 minutes</p><h3>Entry ritual</h3></header>'+
+    '<ol class="steps"><li><p>Put your phone in airplane mode and set it face down out of reach, or leave it in another room.</p></li><li><p>Sit in the same spot every time. Set the Bible, notebook and pen where your hands will land.</p></li><li><p>Add one sensory cue: a warm drink, a candle or a soft light.</p></li><li><p>Sit upright, feet flat, hands open on your lap. Take three slow breaths.</p></li><li><p>Pray the opening prayer below before you read a word.</p></li></ol>'+
+    (c.friction?'<aside class="note"><p class="lab">Your friction</p><p>'+esc(c.friction)+'. Remove it before you sit down, not while you are sitting.</p></aside>':'')+
+    (c.place||c.when?'<p class="muted">Your spot: '+esc([c.when,c.place].filter(Boolean).join(' · '))+'</p>':'')+
+    '<blockquote class="quote" style="margin:0">Lord, quiet my mind and open my heart to what you want to say today. Give me eyes to see what is true in this passage and the courage to do what it asks.</blockquote>'+
+  '</section>'+
+  '<section class="sec"><header><p class="lab">'+win+'-minute session</p><h3>Four-stage session flow</h3></header>'+stages+
+    '<div class="timer"><p class="lab" id="tm-stage"></p><p class="big" id="tm-time">00:00</p><div class="bar"><i id="tm-bar"></i></div><p class="muted" id="tm-hint"></p>'+
+    '<div class="acts"><button class="btn primary" id="tm-go" data-act="tmgo">Start</button><button class="btn quiet" data-act="tmskip">Next stage</button><button class="btn quiet" data-act="tmreset">Reset</button></div></div>'+
+  '</section>'+
+  '<section class="sec"><header><p class="lab">James 1:22</p><h3>Turn the passage into one action</h3><p class="muted">Do not just listen to the word. Pick one moment in your day where the passage applies, and decide what you will do before it arrives.</p></header>'+
+    '<p class="formula">If [a specific moment today], then I will [one small action from my reading].</p>'+
+    '<ul class="steps" style="gap:6px"><li><p>If my coworker’s message irritates me, then I will take one slow breath and reply kindly.</p></li><li><p>If I reach for my phone at the first quiet moment, then I will read one verse from this morning instead.</p></li><li><p>If worry shows up at lunch, then I will pray about it for one minute.</p></li></ul>'+
+    '<div class="acts"><button class="btn" data-act="nav" data-v="log">Open today’s log</button></div>'+
+  '</section>'+
+  '<section class="sec"><header><h3>Share it</h3><p class="muted">'+(c.outlet?'You plan to share with: '+esc(c.outlet)+'.':'Pick one person or group, even if it is just a text thread.')+' Keep it casual. Two ways to start:</p></header>'+prompts+'</section>'+
+  '<section class="sec"><header><p class="lab">If you miss 1 to 3 days</p><h3>Grace-based restart</h3></header>'+
+    '<ol class="steps"><li><p>Name it without blame: you missed some days, and that is ordinary.</p></li><li><p>Skip the missed passages. Do not catch up. Continue with today’s reading.</p></li><li><p>Make today small: pray one sentence, read one short passage, write one If/Then. Five minutes is enough.</p></li><li><p>Use the same cue as before, the same seat or the same drink, so the habit remembers you.</p></li><li><p>Tick today on the Log tab. Tomorrow, go back to your normal length.</p></li></ol>'+
+    '<p class="muted">If more than three days have passed, use the five-minute version for three days, then grow it back.</p></section>'+
+  '<section class="sec"><header><h3>Your daily checklist</h3><p class="muted">Rename, remove or add items to match what you write in your own notebook.</p></header>'+hs+
+    '<div class="hrow"><input type="text" id="newh" placeholder="Add an item" aria-label="New checklist item"><button class="btn primary sm" data-act="addh">Add</button></div></section>';
+}
+
+function viewPrompts(){
+  var S=state.settings,pf=pform;
+  var list=S.prompts.filter(function(p){return !pCat||!p.cat||p.cat===pCat});
+  var cards=list.map(function(p){
+    var open=pOpen===p.id,cn=p.cat?catName(p.cat):'',id=esc(p.id);
+    return '<li class="prompt"><div class="ph"><h4>'+esc(p.t)+'</h4>'+(cn?'<span class="chip">'+esc(cn)+'</span>':'')+'</div>'+
+      '<p class="ptext'+(open?' open':'')+'">'+esc(p.text)+'</p>'+
+      '<div class="acts"><button class="btn primary sm" data-act="copyp" data-id="'+id+'">Copy</button>'+
+      '<button class="btn quiet sm" data-act="ptoggle" data-id="'+id+'">'+(open?'Show less':'Show full')+'</button>'+
+      '<button class="btn quiet sm" data-act="pedit" data-id="'+id+'">Edit</button>'+
+      '<button class="btn quiet sm danger" data-act="pdel" data-id="'+id+'">'+(confirmId===p.id?'Tap again to delete':'Delete')+'</button></div></li>';
+  }).join('');
+  var cats=S.cats.map(function(c){return '<div class="hrow"><input type="text" id="cn-'+esc(c.id)+'" data-cid="'+esc(c.id)+'" value="'+esc(c.t)+'" aria-label="Category name"><button class="btn quiet danger sm" data-act="rmc" data-id="'+esc(c.id)+'">Remove</button></div>'}).join('');
+  return '<section class="sec"><header><p class="lab">Prompt bank</p><h2>Prompts</h2><p class="muted">Copy a prompt, paste it into Claude with your passage or sermon text, then write what you want to keep in your notebook.</p></header>'+
+    '<label class="fld"><span class="lab">Show prompts for</span><select id="pc" data-pc="1">'+catOpts(pCat,'All categories')+'</select></label>'+
+    (list.length?'<ul class="sec">'+cards+'</ul>':'<p class="muted">No prompts here yet. Add one below.</p>')+'</section>'+
+  '<section class="sec" id="pform"><header><h3>'+(pf.id?'Edit prompt':'Add a prompt')+'</h3></header>'+
+    '<label class="fld"><span class="lab">Name</span><input type="text" id="pf-t" data-pf="t" value="'+esc(pf.t)+'" placeholder="e.g. Sermon notes"></label>'+
+    '<label class="fld"><span class="lab">Category (optional)</span><select id="pf-cat" data-pf="cat">'+catOpts(pf.cat,'Any category')+'</select></label>'+
+    '<label class="fld"><span class="lab">Prompt</span><textarea id="pf-text" data-pf="text" rows="8" placeholder="Paste or write your prompt">'+esc(pf.text)+'</textarea></label>'+
+    '<div class="acts"><button class="btn primary" data-act="psave">'+(pf.id?'Update prompt':'Save prompt')+'</button>'+((pf.id||pf.t||pf.text)?'<button class="btn quiet" data-act="pcancel">'+(pf.id?'Cancel':'Clear')+'</button>':'')+'</div></section>'+
+  '<section class="sec"><header><h3>Your categories</h3><p class="muted">Used for devotion entries and prompts. Rename, remove or add your own.</p></header>'+cats+
+    '<div class="hrow"><input type="text" id="newc" placeholder="Add a category" aria-label="New category"><button class="btn primary sm" data-act="addc">Add</button></div></section>';
+}
+
+/* ---------- Logo, music, settings ---------- */
+var setOpen=false,dockOpen=false,dockMin=false,musicDraft='',bkText='',logoKey=null,dockKey='';
+function paintLogo(){
+  var L=$('#logo');if(!L)return;
+  var k=state.settings.logo||'';if(k===logoKey)return;logoKey=k;
+  L.innerHTML=k?'<img alt="" src="'+esc(k)+'">':'<svg viewBox="0 0 64 64" aria-hidden="true"><use href="#mascot"/></svg>';
+}
+function applyAnim(){document.documentElement.dataset.anim=state.settings.anim===false?'off':'on'}
+function parseMusic(u){
+  u=String(u||'').trim();if(!u)return null;
+  var m=u.match(/spotify\.com\/(?:intl-[a-z]+\/)?(track|album|playlist|episode|show|artist)\/([A-Za-z0-9]+)/)||u.match(/^spotify:(track|album|playlist|episode|show|artist):([A-Za-z0-9]+)/);
+  if(m)return {src:'https://open.spotify.com/embed/'+m[1]+'/'+m[2]+'?theme=0',h:(m[1]==='track'||m[1]==='episode')?152:352};
+  if(/(youtube\.com|youtu\.be|youtube-nocookie\.com)/.test(u)){
+    var mv=u.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/),ml=u.match(/[?&]list=([A-Za-z0-9_-]+)/);
+    var v=mv&&mv[1]!=='videoseries'?mv[1]:null,l=ml?ml[1]:null;
+    if(v)return {src:'https://www.youtube.com/embed/'+v+'?playsinline=1'+(l?'&list='+l:''),h:190};
+    if(l)return {src:'https://www.youtube.com/embed/videoseries?list='+l+'&playsinline=1',h:190};
+  }
+  return null;
+}
+function paintDock(){
+  var d=$('#dock'),m=state.settings.music?parseMusic(state.settings.music):null;
+  if(!dockOpen||!m){d.hidden=true;d.innerHTML='';dockKey='';return}
+  d.hidden=false;d.classList.toggle('min',dockMin);
+  if(dockKey===m.src)return;dockKey=m.src;
+  d.innerHTML='<div class="dh"><span>♪ Devotion music</span><span class="dbtns"><button class="btn quiet sm" id="dk-min" data-act="dockmin">'+(dockMin?'Show':'Hide')+'</button><button class="btn quiet sm" data-act="dockclose">Stop</button></span></div>'+
+    '<iframe title="Music player" src="'+esc(m.src)+'" style="height:'+m.h+'px" allow="autoplay; encrypted-media; clipboard-write; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+}
+function renderSettings(){
+  var o=$('#ov2');
+  if(!setOpen){o.hidden=true;o.innerHTML='';return}
+  var S=state.settings;
+  o.hidden=false;
+  o.innerHTML='<div class="panel" role="dialog" aria-modal="true" aria-labelledby="st-t"><div class="ph"><h3 id="st-t">Settings</h3><button class="btn quiet sm" data-act="closeset">Close</button></div>'+
+  '<div class="sset"><h4>Music while you read</h4><p class="muted">Paste a YouTube video or playlist link, or a Spotify track, album or playlist link. The player stays on screen while you move between tabs.</p>'+
+    '<label class="fld"><span class="lab">Link</span><input type="text" id="mu" data-mu="1" value="'+esc(S.music)+'" placeholder="https://open.spotify.com/playlist/… or https://youtu.be/…" autocomplete="off"></label>'+
+    '<div class="acts"><button class="btn primary sm" data-act="mplay">Play</button><button class="btn quiet sm" data-act="mstop">Stop &amp; clear link</button></div>'+
+    '<p class="muted">Spotify plays full songs only if you are signed in to Spotify in this browser, otherwise 30-second previews. On a phone, music may pause when the screen locks.</p></div>'+
+  '<div class="sset"><h4>Look &amp; feel</h4><div class="lgrow"><span class="lgprev">'+(S.logo?'<img alt="" src="'+esc(S.logo)+'">':'<svg viewBox="0 0 64 64" aria-hidden="true"><use href="#mascot"/></svg>')+'</span>'+
+    '<label class="btn sm">Upload your logo<input type="file" accept="image/*" data-logo="1" hidden></label><button class="btn quiet sm" data-act="logoreset">Use the clover buddy</button></div>'+
+    '<label class="chk"><input type="checkbox" data-an="1"'+(S.anim===false?'':' checked')+'><span class="box" aria-hidden="true"></span><span class="lbl">Moving animations (floating clovers, bouncing logo)</span></label></div>'+
+  acctHtml()+'<div class="sset"><h4>Backup</h4><p class="muted">A backup file is a safe copy of everything, handy before switching devices.</p>'+
+    '<div class="acts"><button class="btn sm" data-act="dlbackup">Download backup</button><button class="btn quiet sm" data-act="copybackup">Copy backup</button></div>'+
+    '<label class="fld"><span class="lab">Restore from a backup</span><textarea id="bkt" data-bk="1" rows="3" placeholder="Paste a backup here">'+esc(bkText)+'</textarea></label>'+
+    '<div class="acts"><label class="btn quiet sm">Choose backup file<input type="file" accept=".json,application/json" data-bkfile="1" hidden></label><button class="btn quiet sm danger" data-act="restore">'+(confirmId==='restore'?'Tap again to replace everything':'Restore')+'</button></div></div></div>';
+}
+function logoFile(f){
+  if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){var img=new Image();
+    img.onload=function(){
+      var c=document.createElement('canvas'),k=Math.min(128/img.width,128/img.height,1);
+      c.width=Math.max(1,Math.round(img.width*k));c.height=Math.max(1,Math.round(img.height*k));
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      var data=null;try{data=c.toDataURL('image/png')}catch(e){}
+      if(!data){toast('Could not read that image.');return}
+      state.settings.logo=data;save('settings');paintLogo();renderSettings();toast('Logo updated.');
+    };
+    img.onerror=function(){toast('That file is not an image.')};
+    img.src=r.result;
+  };
+  r.readAsDataURL(f);
+}
+function backupJson(){return JSON.stringify({app:'devotion-notebook',v:1,settings:state.settings,days:state.days,read:state.read,entries:state.entries},null,1)}
+
+/* ---------- Account sync (Firebase) ---------- */
+/* Optional: paste your Firebase web config between the braces so every device only needs to sign in.
+   Example: var FIREBASE_CONFIG={apiKey:"...",authDomain:"...",projectId:"...",appId:"..."}; */
+var FIREBASE_CONFIG=null;
+var fb={user:null,auth:null,db:null,err:''},fbText='';
+function fbCfg(){
+  if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey)return FIREBASE_CONFIG;
+  try{var v=localStorage.getItem('dn-fbconfig');var c=v?JSON.parse(v):null;return c&&c.apiKey?c:null}catch(e){return null}
+}
+function parseCfg(t){
+  var o={},re=/["']?([A-Za-z]+)["']?\s*:\s*["']([^"']*)["']/g,m;
+  while((m=re.exec(String(t||'')))){o[m[1]]=m[2]}
+  return (o.apiKey&&o.authDomain&&o.projectId&&o.appId)?o:null;
+}
+function loadScript(src){return new Promise(function(res,rej){var el=document.createElement('script');el.src=src;el.onload=res;el.onerror=function(){rej(new Error('Could not load '+src))};document.head.appendChild(el)})}
+function fbStart(cfg){
+  var base='https://www.gstatic.com/firebasejs/10.12.2/';
+  setSync('loading');
+  loadScript(base+'firebase-app-compat.js').then(function(){return loadScript(base+'firebase-auth-compat.js')}).then(function(){return loadScript(base+'firebase-firestore-compat.js')}).then(function(){
+    firebase.initializeApp(cfg);fb.auth=firebase.auth();fb.db=firebase.firestore();
+    fb.auth.onAuthStateChanged(function(u){
+      fb.user=u;
+      if(u){
+        KEYS.forEach(function(k){store.refs[k]=fb.db.doc('users/'+u.uid+'/data/'+k)});
+        got={};setSync('loading');KEYS.forEach(subscribe);
+        setTimeout(function(){if(syncState==='loading')setSync('slow')},10000);
+      }else{
+        KEYS.forEach(function(k){try{if(store.unsubs&&store.unsubs[k])store.unsubs[k]()}catch(e){}});
+        store.refs={};store.unsubs={};setSync('signedout');
+      }
+      if(setOpen)renderSettings();
+    });
+  }).catch(function(e){fb.err=e.message||'Could not reach Firebase';setSync('slow');if(setOpen)renderSettings()});
+}
+function fbSignIn(){
+  if(!fb.auth){toast('Sync is still loading. Try again in a moment.');return}
+  var p=new firebase.auth.GoogleAuthProvider();
+  fb.auth.signInWithPopup(p).catch(function(e){
+    var c=e&&e.code;
+    if(c==='auth/popup-blocked'||c==='auth/operation-not-supported-in-this-environment')return fb.auth.signInWithRedirect(p);
+    if(c!=='auth/popup-closed-by-user'&&c!=='auth/cancelled-popup-request')toast('Sign-in failed ('+(c||'error')+'). Check the setup steps in the README.');
+  });
+}
+function initSync(){
+  try{if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(function(){})}catch(e){}
+  var cfg=fbCfg();
+  if(cfg)fbStart(cfg);else initDb();
+}
+function acctHtml(){
+  var cfg=fbCfg();
+  var h='<div class="sset"><h4>Account &amp; sync</h4><p class="muted">Status: '+esc(SYNC[syncState])+'</p>';
+  if(cfg){
+    if(fb.user)h+='<p>Signed in as <b>'+esc(fb.user.email||fb.user.displayName||'your account')+'</b>. Your notes sync to every device you sign in on.</p><div class="acts"><button class="btn quiet sm" data-act="fbsignout">Sign out</button></div>';
+    else h+='<p class="muted">Sign in to save your notebook to your account and open it on any device.</p><div class="acts"><button class="btn primary sm" data-act="fbsignin">Sign in with Google</button></div><p class="muted">If this device already has notes and your account has notes too, the account version wins. Download a backup below first if you are unsure.</p>';
+    if(fb.err)h+='<p class="muted">Problem: '+esc(fb.err)+'</p>';
+    if(!FIREBASE_CONFIG)h+='<div class="acts"><button class="btn quiet sm danger" data-act="fbclear">Remove saved sync settings</button></div>';
+  }else{
+    h+='<p class="muted">Sync is not set up on this device yet. Follow the README to make a free Firebase project, then paste its web config here (or into FIREBASE_CONFIG inside index.html so every device is ready).</p>'+
+      '<label class="fld"><span class="lab">Firebase web config</span><textarea id="fbc" data-fbc="1" rows="4" placeholder="apiKey: &quot;…&quot;, authDomain: &quot;…&quot;, projectId: &quot;…&quot;, appId: &quot;…&quot;">'+esc(fbText)+'</textarea></label>'+
+      '<div class="acts"><button class="btn primary sm" data-act="fbsave">Save and continue</button></div>';
+  }
+  return h+'</div>';
+}
+var VIEWS={log:viewLog,contents:viewContents,prompts:viewPrompts,plan:viewPlan,tracker:viewTracker,bible:viewBible};
+var NAV=[['log','Log','<path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/>'],['contents','Contents','<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>'],['prompts','Prompts','<path d="M5 5h14v10H10l-4 4v-4H5z"/>'],['plan','Plan','<path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/>'],['tracker','Tracker','<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/><path d="M9 15l2 2 4-4"/>'],['bible','Bible','<path d="M5 4h10a3 3 0 013 3v13H8a3 3 0 01-3-3V4z"/><path d="M5 17a3 3 0 013-3h10"/>']];
+
+function render(){
+  var y=window.scrollY,ae=document.activeElement,aid=ae&&ae.id,ss=null,se=null;
+  try{ss=ae.selectionStart;se=ae.selectionEnd}catch(e){}
+  if(draft.pageAuto&&!draft.id)draft.page=nextPage();
+  $('#nav').innerHTML=NAV.map(function(n){return '<button id="nv-'+n[0]+'" data-act="nav" data-v="'+n[0]+'"'+(cur===n[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true">'+n[2]+'</svg><span>'+n[1]+'</span></button>'}).join('');
+  $('#view').innerHTML=VIEWS[cur]();
+  renderSheet();paintLogo();applyAnim();
+  if(cur==='plan')tmPaint();
+  if(aid){var el=document.getElementById(aid);if(el){try{el.focus({preventScroll:true});if(ss!==null&&el.setSelectionRange)el.setSelectionRange(ss,se)}catch(e){}}}
+  window.scrollTo(0,y);
+}
+function go(v){
+  if(VIEWS_LIST.indexOf(v)<0)return;
+  cur=v;confirmId=null;render();window.scrollTo(0,0);
+  try{if(location.hash.slice(1)!==v)location.hash=v}catch(e){}
+}
+function toast(msg){
+  var t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){t.hidden=true},3400);
+}
+
+/* ---------- Chapter sheet ---------- */
+function renderSheet(){
+  var ov=$('#ov');
+  if(!sel){ov.hidden=true;ov.innerHTML='';return}
+  var b=byName[sel.book],rd={};(state.read[b.name]||[]).forEach(function(n){rd[n]=1});
+  var ch=sel.ch||nextUnread(b.name)||1,cnt=Object.keys(rd).length,chips='';
+  for(var i=1;i<=b.n;i++)chips+='<button class="chb'+(rd[i]?' on':'')+(i===ch?' sel':'')+'" data-act="chap" data-n="'+i+'" aria-pressed="'+(!!rd[i])+'">'+i+'</button>';
+  ov.hidden=false;
+  ov.innerHTML='<div class="panel" role="dialog" aria-modal="true" aria-labelledby="sh-t"><div class="ph"><h3 id="sh-t">'+esc(b.name)+'</h3><button class="btn quiet sm" id="sh-x" data-act="closesheet">Close</button></div>'+
+    '<p class="muted">'+cnt+' of '+b.n+' chapters read. Tap a chapter to mark it read or unread.</p><div class="chs">'+chips+'</div>'+
+    '<div class="acts"><a class="btn primary" href="'+esc(bibleUrl({book:b,ch:ch,v1:null,v2:null}))+'" target="_blank" rel="noopener">Open '+esc(b.name+' '+ch)+' ↗</a><button class="btn quiet" data-act="markall">Mark all read</button><button class="btn quiet" data-act="clearbook">Clear</button></div></div>';
+}
+
+/* ---------- Timer ---------- */
+var tm={run:false,i:0,left:0,iv:null,lock:null,done:false};
+function stageSecs(i){return Math.round(Math.max(5,Number(state.settings.ctx.win)||20)*60*STAGES[i][1])}
+function tmReset(){tm.run=false;tm.i=0;tm.done=false;tm.left=stageSecs(0);clearInterval(tm.iv);tmRelease();tmPaint()}
+function tmRelease(){try{if(tm.lock){tm.lock.release();tm.lock=null}}catch(e){}}
+function tmPaint(){
+  var t=$('#tm-time');if(!t)return;
+  var m=Math.floor(tm.left/60),s=tm.left%60;
+  t.textContent=pad(m)+':'+pad(s);
+  $('#tm-stage').textContent=tm.done?'Finished':'Stage '+(tm.i+1)+' of 4 · '+STAGES[tm.i][0];
+  $('#tm-hint').textContent=tm.done?'Log what you wrote while it is fresh.':STAGES[tm.i][2];
+  $('#tm-bar').style.width=(tm.done?100:(1-tm.left/stageSecs(tm.i))*100)+'%';
+  $('#tm-go').textContent=tm.run?'Pause':(tm.done?'Start again':'Start');
+}
+function tmTick(){
+  if(!tm.run)return;
+  tm.left--;
+  if(tm.left<=0){
+    if(tm.i<STAGES.length-1){tm.i++;tm.left=stageSecs(tm.i);toast('Next: '+STAGES[tm.i][0])}
+    else{tm.run=false;tm.done=true;tm.left=0;clearInterval(tm.iv);tmRelease();toast('Session finished.')}
+  }
+  tmPaint();
+}
+function tmGo(){
+  if(tm.done){tmReset()}
+  tm.run=!tm.run;clearInterval(tm.iv);
+  if(tm.run){
+    tm.iv=setInterval(tmTick,1000);
+    try{if(navigator.wakeLock&&navigator.wakeLock.request)navigator.wakeLock.request('screen').then(function(l){tm.lock=l}).catch(function(){})}catch(e){}
+  }else tmRelease();
+  tmPaint();
+}
+function tmSkip(){if(tm.i<STAGES.length-1){tm.i++;tm.left=stageSecs(tm.i)}else{tm.left=0;tm.run=false;tm.done=true;clearInterval(tm.iv);tmRelease()}tmPaint()}
+
+/* ---------- Actions ---------- */
+function setSetting(k,v){
+  state.settings[k]=v;save('settings');render();
+}
+function toggleHabit(date,id){
+  var set={};(state.days[date]||[]).forEach(function(x){set[x]=1});
+  if(set[id])delete set[id];else set[id]=1;
+  var arr=Object.keys(set);
+  if(arr.length)state.days[date]=arr;else delete state.days[date];
+  save('days');render();
+}
+function saveEntry(){
+  var d=draft,ref=parseRef(d.ref);
+  if(!d.title.trim()&&!d.ref.trim()){toast('Add a title or a passage first.');return}
+  var e={id:d.id||uid(),date:d.date,page:(d.page===''||d.page==null)?null:Number(d.page),title:d.title.trim(),ref:d.ref.trim(),cat:d.cat||'',f:d.f.slice(0,3)};
+  var L=state.entries.list,i=L.map(function(x){return x.id}).indexOf(e.id);
+  if(i>=0)L[i]=e;else L.push(e);
+  save('entries');
+  var ids=hset(),day={};(state.days[e.date]||[]).forEach(function(x){day[x]=1});
+  if(ids.read&&e.ref)day.read=1;
+  if(ids.journal&&e.f.some(function(x){return x.trim()}))day.journal=1;
+  state.days[e.date]=Object.keys(day);if(!state.days[e.date].length)delete state.days[e.date];
+  save('days');
+  if(d.mark&&ref){
+    var set={};(state.read[ref.book.name]||[]).forEach(function(n){set[n]=1});set[ref.ch]=1;
+    state.read[ref.book.name]=Object.keys(set).map(Number).sort(function(a,b){return a-b});save('read');
+  }
+  draft=newDraft(e.date);
+  toast('Saved to Contents'+(e.page?' as page '+e.page:'')+'.');
+  render();
+}
+function act(name,t){
+  var ds=t.dataset;
+  switch(name){
+    case 'nav':go(ds.v);break;
+    case 'today':draft.date=ymd(new Date());render();break;
+    case 'wk':if(draft.id)draft=newDraft(ds.d);else draft.date=ds.d;render();break;
+    case 'save':saveEntry();break;
+    case 'clear':draft=newDraft(draft.date);render();break;
+    case 'cancel':draft=newDraft(draft.date);render();break;
+    case 'newentry':draft=newDraft(ymd(new Date()));go('log');break;
+    case 'toggle':openId=openId===ds.id?null:ds.id;confirmId=null;render();break;
+    case 'edit':{
+      var e=state.entries.list.filter(function(x){return x.id===ds.id})[0];if(!e)break;
+      draft={id:e.id,date:e.date,page:e.page==null?'':e.page,pageAuto:false,title:e.title||'',cat:e.cat||'',ref:e.ref||'',f:[(e.f||[])[0]||'',(e.f||[])[1]||'',(e.f||[])[2]||''],mark:false};
+      go('log');break;}
+    case 'del':
+      if(confirmId===ds.id){state.entries.list=state.entries.list.filter(function(x){return x.id!==ds.id});save('entries');confirmId=null;openId=null;toast('Entry deleted.');render()}
+      else{confirmId=ds.id;render()}
+      break;
+    case 'sort':sortBy=ds.v;render();break;
+    case 'calprev':calM.m--;if(calM.m<0){calM.m=11;calM.y--}render();break;
+    case 'calnext':calM.m++;if(calM.m>11){calM.m=0;calM.y++}render();break;
+    case 'goday':if(draft.id)draft=newDraft(ds.d);else draft.date=ds.d;go('log');break;
+    case 'startplan':state.settings.start=ymd(new Date());save('settings');toast('Your 30 days start today.');render();break;
+    case 'book':sel={book:ds.b,ch:null};renderSheet();var x=$('#sh-x');if(x)x.focus();break;
+    case 'closesheet':sel=null;renderSheet();break;
+    case 'chap':{
+      var b=byName[sel.book],n=+ds.n,set={};(state.read[b.name]||[]).forEach(function(v){set[v]=1});
+      if(set[n])delete set[n];else set[n]=1;
+      var arr=Object.keys(set).map(Number).sort(function(a,c){return a-c});
+      if(arr.length)state.read[b.name]=arr;else delete state.read[b.name];
+      sel.ch=n;save('read');render();break;}
+    case 'markall':{var bb=byName[sel.book],all=[];for(var i=1;i<=bb.n;i++)all.push(i);state.read[bb.name]=all;save('read');render();break;}
+    case 'clearbook':delete state.read[sel.book];save('read');render();break;
+    case 'usepassage':draft.ref=ds.ref;go('log');break;
+    case 'rmh':
+      if(state.settings.habits.length<=1){toast('Keep at least one item.');break}
+      state.settings.habits=state.settings.habits.filter(function(h){return h.id!==ds.id});save('settings');render();break;
+    case 'addh':addHabit();break;
+    case 'copy':
+      try{navigator.clipboard.writeText(ds.text).then(function(){toast('Copied.')},function(){toast('Press and hold the text to copy it.')})}catch(e){toast('Press and hold the text to copy it.')}
+      break;
+    case 'opensettings':setOpen=true;confirmId=null;renderSettings();break;
+    case 'closeset':setOpen=false;confirmId=null;renderSettings();break;
+    case 'music':
+      if(!state.settings.music){setOpen=true;renderSettings();var mi=$('#mu');if(mi)mi.focus()}
+      else{dockOpen=!dockOpen;paintDock()}
+      break;
+    case 'mplay':{
+      var inp=$('#mu'),u=inp?inp.value.trim():'';
+      if(!parseMusic(u)){toast('That does not look like a YouTube or Spotify link.');break}
+      state.settings.music=u;save('settings');dockOpen=true;dockMin=false;dockKey='';paintDock();renderSettings();toast('Music is ready. Press play in the player.');break;}
+    case 'mstop':state.settings.music='';save('settings');dockOpen=false;dockKey='';paintDock();renderSettings();break;
+    case 'dockmin':dockMin=!dockMin;$('#dock').classList.toggle('min',dockMin);{var b0=$('#dk-min');if(b0)b0.textContent=dockMin?'Show':'Hide'}break;
+    case 'dockclose':dockOpen=false;paintDock();break;
+    case 'logoreset':state.settings.logo='';save('settings');paintLogo();renderSettings();break;
+    case 'dlbackup':
+      try{var bl=new Blob([backupJson()],{type:'application/json'}),an=document.createElement('a');an.href=URL.createObjectURL(bl);an.download='devotion-notebook-backup.json';document.body.appendChild(an);an.click();an.remove();toast('Backup downloaded.')}
+      catch(er2){toast('Downloads are blocked here. Use Copy backup instead.')}
+      break;
+    case 'copybackup':
+      try{navigator.clipboard.writeText(backupJson()).then(function(){toast('Backup copied. Paste it somewhere safe.')},function(){toast('Could not copy. Try Download backup.')})}catch(er3){toast('Could not copy. Try Download backup.')}
+      break;
+    case 'restore':{
+      var ta=$('#bkt'),txt=ta?ta.value:bkText,o2=null;
+      try{o2=JSON.parse(txt)}catch(er4){}
+      if(!o2||o2.app!=='devotion-notebook'){toast('That does not look like a Devotion Notebook backup.');confirmId=null;renderSettings();break}
+      if(confirmId!=='restore'){confirmId='restore';renderSettings();break}
+      state.settings=mergeSettings(o2.settings);state.days=o2.days||{};state.read=o2.read||{};
+      state.entries=(o2.entries&&Array.isArray(o2.entries.list))?o2.entries:{list:[]};
+      KEYS.forEach(save);confirmId=null;bkText='';logoKey=null;tmReset();render();renderSettings();paintDock();toast('Backup restored.');break;}
+    case 'fbsignin':fbSignIn();break;
+    case 'fbsignout':if(fb.auth)fb.auth.signOut();break;
+    case 'fbsave':{
+      var ta2=$('#fbc'),cfg2=parseCfg(ta2?ta2.value:fbText);
+      if(!cfg2){toast('I could not find apiKey, authDomain, projectId and appId in that.');break}
+      try{localStorage.setItem('dn-fbconfig',JSON.stringify(cfg2))}catch(er5){toast('This browser would not save the settings.');break}
+      toast('Saved. Reloading…');setTimeout(function(){location.reload()},600);break;}
+    case 'fbclear':try{localStorage.removeItem('dn-fbconfig')}catch(er6){}location.reload();break;
+    case 'ptoggle':pOpen=pOpen===ds.id?null:ds.id;render();break;
+    case 'copyp':{
+      var pp=state.settings.prompts.filter(function(x){return x.id===ds.id})[0];if(!pp)break;
+      try{navigator.clipboard.writeText(pp.text).then(function(){toast('Prompt copied.')},function(){toast('Open the prompt and press and hold the text to copy it.')})}catch(er){toast('Open the prompt and press and hold the text to copy it.')}
+      break;}
+    case 'pedit':{
+      var p2=state.settings.prompts.filter(function(x){return x.id===ds.id})[0];if(!p2)break;
+      pform={id:p2.id,t:p2.t,cat:p2.cat||'',text:p2.text};render();var pfe=$('#pform');if(pfe)pfe.scrollIntoView();break;}
+    case 'pdel':
+      if(confirmId===ds.id){state.settings.prompts=state.settings.prompts.filter(function(x){return x.id!==ds.id});if(pform.id===ds.id)pform={id:null,t:'',cat:'',text:''};save('settings');confirmId=null;toast('Prompt deleted.');render()}
+      else{confirmId=ds.id;render()}
+      break;
+    case 'psave':{
+      if(!pform.t.trim()||!pform.text.trim()){toast('Add a name and the prompt text.');break}
+      var rec={id:pform.id||('p'+uid()),t:pform.t.trim(),cat:pform.cat||'',text:pform.text},PL=state.settings.prompts,pi=PL.map(function(x){return x.id}).indexOf(rec.id);
+      if(pi>=0)PL[pi]=rec;else PL.push(rec);
+      save('settings');pform={id:null,t:'',cat:'',text:''};toast('Prompt saved.');render();break;}
+    case 'pcancel':pform={id:null,t:'',cat:'',text:''};render();break;
+    case 'addc':{
+      var ci=$('#newc'),cv=ci?ci.value.trim():'';
+      if(!cv){toast('Type a name for the category.');break}
+      state.settings.cats.push({id:'c'+uid(),t:cv});save('settings');render();break;}
+    case 'rmc':
+      state.settings.cats=state.settings.cats.filter(function(c){return c.id!==ds.id});
+      if(catFilter===ds.id)catFilter='';if(pCat===ds.id)pCat='';if(draft.cat===ds.id)draft.cat='';
+      save('settings');render();break;
+    case 'tmgo':tmGo();break;
+    case 'tmskip':tmSkip();break;
+    case 'tmreset':tmReset();break;
+  }
+}
+function addHabit(){
+  var inp=$('#newh'),v=inp?inp.value.trim():'';
+  if(!v){toast('Type a name for the new item.');return}
+  state.settings.habits.push({id:'h'+uid(),t:v});save('settings');render();
+}
+
+/* ---------- Events ---------- */
+var viewEl=$('#view'),ovEl=$('#ov');
+function onClick(e){
+  if(e.target===ovEl){sel=null;renderSheet();return}
+  var t=e.target.closest('[data-act]');if(!t)return;
+  act(t.dataset.act,t);
+}
+viewEl.addEventListener('click',onClick);
+var ov2El=$('#ov2');
+$('.top').addEventListener('click',onClick);
+ov2El.addEventListener('click',function(e){
+  if(e.target===ov2El){setOpen=false;renderSettings();return}
+  var t=e.target.closest('[data-act]');if(t)act(t.dataset.act,t);
+});
+$('#dock').addEventListener('click',function(e){var t=e.target.closest('[data-act]');if(t)act(t.dataset.act,t)});
+ov2El.addEventListener('input',function(e){var t=e.target;if(t.dataset.mu)musicDraft=t.value;else if(t.dataset.bk)bkText=t.value;else if(t.dataset.fbc)fbText=t.value});
+ov2El.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset.logo){logoFile(t.files&&t.files[0]);t.value=''}
+  else if(t.dataset.bkfile){var f=t.files&&t.files[0];if(f){var r=new FileReader();r.onload=function(){bkText=String(r.result);var ta=$('#bkt');if(ta)ta.value=bkText};r.readAsText(f)}t.value=''}
+  else if(t.dataset.an){state.settings.anim=t.checked;save('settings');applyAnim()}
+});
+ovEl.addEventListener('click',onClick);
+$('#nav').addEventListener('click',onClick);
+viewEl.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset.d){
+    var k=t.dataset.d;
+    if(k==='page'){draft.page=t.value;draft.pageAuto=false}
+    else if(k==='title'||k==='xr'||k==='iff'||k==='thn')draft[k]=t.value;
+    else if(k==='ref'){draft.ref=t.value;$('#refprev').innerHTML=refPrev()}
+  }else if(t.dataset.fi!==undefined)draft.f[+t.dataset.fi]=t.value;
+  else if(t.dataset.pf)pform[t.dataset.pf]=t.value;
+  else if(t.id==='q'){query=t.value;render()}
+});
+viewEl.addEventListener('change',function(e){
+  var t=e.target,ds=t.dataset;
+  if(ds.habit)toggleHabit(draft.date,ds.habit);
+  else if(ds.d==='date'){if(t.value){draft.date=t.value;render()}}
+  else if(ds.d==='mark')draft.mark=t.checked;
+  else if(ds.d==='cat')draft.cat=t.value;
+  else if(ds.cf!==undefined){catFilter=t.value;render()}
+  else if(ds.pc!==undefined){pCat=t.value;render()}
+  else if(ds.pf!==undefined)pform[ds.pf]=t.value;
+  else if(ds.cid){var cc=state.settings.cats.filter(function(x){return x.id===ds.cid})[0];if(cc&&t.value.trim()){cc.t=t.value.trim();save('settings')}else if(cc)t.value=cc.t}
+  else if(ds.ctx){
+    var v=ds.ctx==='win'?Number(t.value):t.value.trim();
+    state.settings.ctx[ds.ctx]=v;save('settings');
+    if(ds.ctx==='win'){tmReset();render()}
+  }
+  else if(ds.hid){
+    var h=state.settings.habits.filter(function(x){return x.id===ds.hid})[0];
+    if(h&&t.value.trim()){h.t=t.value.trim();save('settings')}else if(h){t.value=h.t}
+  }
+  else if(ds.set){
+    var key=ds.set,val=t.value;
+    if(key==='template'){val=val.trim();if(val&&!/^https?:\/\//i.test(val)){toast('The link must start with https://');t.value=state.settings.template;return}}
+    setSetting(key,val);
+  }
+});
+viewEl.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='newh'){e.preventDefault();addHabit()}});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(setOpen){setOpen=false;renderSettings()}else if(sel){sel=null;renderSheet()}});
+window.addEventListener('hashchange',function(){var v=location.hash.slice(1);if(VIEWS_LIST.indexOf(v)>=0&&v!==cur){cur=v;render();window.scrollTo(0,0)}});
+
+/* ---------- Start ---------- */
+try{var h0=location.hash.slice(1);if(VIEWS_LIST.indexOf(h0)>=0)cur=h0}catch(e){}
+tmReset();
+setSync('local');
+render();
+initSync();
+})();
+</script>
+
+</body></html>
